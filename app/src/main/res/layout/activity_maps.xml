@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.widget.LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start"
     tools:context="kr.co.mapchat.MapsActivity">
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -20,11 +22,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:layout_margin="@dimen/fab_margin"
         android:src="@drawable/ic_create_black_48dp"
         app:fab_colorNormal="@color/WHITE"
         app:fab_colorPressed="@color/light_gray"
-        app:fab_colorRipple="@color/dimgray" />
+        app:fab_colorRipple="@color/dimgray"
+        android:layout_marginLeft="@dimen/fab_margin"
+        android:layout_marginRight="@dimen/fab_margin"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
 
     <ImageView
         android:id="@+id/marker"
@@ -36,8 +43,21 @@
         app:layout_anchor="@+id/map"
         app:layout_anchorGravity="center_vertical|center_horizontal" />
 
+    <!--<include-->
+        <!--layout="@layout/app_bar_sidebar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"/>-->
 
-</android.widget.LinearLayout>
+    <!--<android.support.design.widget.NavigationView-->
+        <!--android:id="@+id/nav_view"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:layout_gravity="start"-->
+        <!--android:fitsSystemWindows="true"-->
+        <!--app:headerLayout="@layout/nav_header_sidebar"-->
+        <!--app:menu="@menu/activity_sidebar_drawer" />-->
+
+</RelativeLayout>
 
 
 
