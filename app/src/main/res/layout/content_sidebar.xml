@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/map_layout"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="kr.co.mapchat.MapsActivity"
+    tools:context="kr.co.mapchat.Map.MapsActivity"
     tools:showIn="@layout/app_bar_sidebar">
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/map"
-        tools:context=".MapsActivity"
+        tools:context=".Map.MapsActivity"
         android:name="com.google.android.gms.maps.SupportMapFragment" />
 
     <com.github.clans.fab.FloatingActionButton

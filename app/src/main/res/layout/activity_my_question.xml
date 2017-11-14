@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="kr.co.mapchat.UserData.MyQuestion">
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/listView"
+        android:layout_width="369dp"
+        android:layout_height="336dp"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:orientation="vertical"
+        tools:context="kr.co.mapchat.UserData.MyQuestion"
+        tools:layout_editor_absoluteY="102dp"
+        tools:layout_editor_absoluteX="8dp">
+
+        <ScrollView
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/itemList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"></LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="187dp"
+        android:layout_height="36dp"
+        android:text="MyQuestion"
+        android:textSize="10pt"
+        tools:layout_editor_absoluteX="9dp"
+        tools:layout_editor_absoluteY="16dp"
+        tools:text="My Question List" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MakeQuestion"
+        tools:layout_editor_absoluteX="288dp"
+        tools:layout_editor_absoluteY="447dp"
+        tools:text="Writting" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="QuestionDelete"
+        tools:layout_editor_absoluteX="196dp"
+        tools:layout_editor_absoluteY="447dp"
+        tools:text="Delete" />
+
+</android.support.constraint.ConstraintLayout>

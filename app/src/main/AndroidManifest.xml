@@ -17,7 +17,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".SplashActivity"
+            android:name=".Splash.SplashActivity"
             android:label="MapChat"
             android:screenOrientation="portrait"
             android:theme="@style/SplashTheme"> <!-- 강제 세로모드 (스플래쉬는 가로 지원 X ) -->
@@ -28,8 +28,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -43,9 +41,15 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".MapsActivity"
-            android:label="@string/title_activity_maps"
-            android:theme="@style/Theme.AppCompat.NoActionBar"></activity>
+            android:name=".Map.MapsActivity"
+            android:label=""
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+        <activity android:name=".UserData.MyAnswer" />
+        <activity android:name=".UserData.MyInfo" />
+        <activity android:name=".UserData.MyQuestion" />
+        <activity android:name=".UserData.AllQuestion" />
+        <activity android:name=".UserData.MyBookMark" />
+        <activity android:name=".UserData.UserRank"></activity>
     </application>
 
 </manifest>

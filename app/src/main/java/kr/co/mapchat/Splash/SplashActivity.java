@@ -1,8 +1,10 @@
-package kr.co.mapchat;
+package kr.co.mapchat.Splash;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+
+import kr.co.mapchat.Map.MapsActivity;
 
 //로딩화면 2초후 메인엑티비티전환
 
