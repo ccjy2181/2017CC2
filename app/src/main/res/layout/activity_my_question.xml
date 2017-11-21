@@ -9,30 +9,15 @@
         android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <com.daimajia.swipe.SwipeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent" android:layout_height="80dp">
-            <!-- Bottom View Start-->
-            <LinearLayout
-                android:background="#66ddff00"
-                android:id="@+id/bottom_wrapper"
-                android:layout_width="160dp"
-                android:weightSum="1"
-                android:layout_height="match_parent">
-                <!--What you want to show-->
-            </LinearLayout>
-            <!-- Bottom View End-->
-
-            <!-- Surface View Start -->
-            <LinearLayout
-                android:padding="10dp"
-                android:background="#ffffff"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-                <!--What you want to show in SurfaceView-->
-            </LinearLayout>
-            <!-- Surface View End -->
-        </com.daimajia.swipe.SwipeLayout>
+        <ListView
+            android:id="@+id/myQuestionList"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="#FFFFFF"
+            android:dividerHeight="1.5dp"
+            android:textSize="15dp"/>
     </android.support.v4.widget.SwipeRefreshLayout>
+
 
     <com.github.clans.fab.FloatingActionButton
         android:id="@+id/fab"

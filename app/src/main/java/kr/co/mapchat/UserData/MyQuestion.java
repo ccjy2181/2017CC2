@@ -20,20 +20,20 @@ public class MyQuestion extends AppCompatActivity implements SwipeRefreshLayout.
         setContentView(R.layout.activity_my_question);
         adapter = new ListViewAdapter() ;
 
-        // 리스트뷰 참조 및 Adapter달기
-        listview = (ListView)findViewById(R.id.myQuestionList);
-        listview.setAdapter(adapter);
-        adapter.addItem("1", "테스트", "내용");
-        adapter.addItem("2", "테스트", "내용");
-        adapter.addItem("3", "테스트", "내용");
-        adapter.addItem("4", "테스트", "내용");
-        adapter.addItem("5", "테스트", "내용");
-        adapter.addItem("6", "테스트", "내용");
-        adapter.addItem("7", "테스트", "내용");
-        adapter.notifyDataSetChanged();
-
-        mSwipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh);
-        mSwipeRefreshLayout.setOnRefreshListener(this);
+//        // 리스트뷰 참조 및 Adapter달기
+//        listview = (ListView)findViewById(R.id.myQuestionList);
+//        listview.setAdapter(adapter);
+//        adapter.addItem("1", "테스트", "내용");
+//        adapter.addItem("2", "테스트", "내용");
+//        adapter.addItem("3", "테스트", "내용");
+//        adapter.addItem("4", "테스트", "내용");
+//        adapter.addItem("5", "테스트", "내용");
+//        adapter.addItem("6", "테스트", "내용");
+//        adapter.addItem("7", "테스트", "내용");
+//        adapter.notifyDataSetChanged();
+//
+//        mSwipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh);
+//        mSwipeRefreshLayout.setOnRefreshListener(this);
 
     }
 
