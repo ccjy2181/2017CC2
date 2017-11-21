@@ -1,5 +1,6 @@
 package kr.co.mapchat;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+
+import com.github.clans.fab.FloatingActionButton;
 
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
@@ -26,6 +29,7 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
     MapView mapView;
     RelativeLayout mapViewContainer;
     View view;
+    MapPoint mapPoint;
 
     double[] location = {0,0};
 
@@ -45,7 +49,19 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
 
         mapViewContainer = (RelativeLayout)view.findViewById(R.id.map_view);
 
-
+        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.write_btn);
+        FloatingActionButton.OnClickListener mClickListener = new View.OnClickListener() {
+            public void onClick(View v) {
+                mapPoint = mapView.getMapCenterPoint();
+                location[0] = mapPoint.getMapPointGeoCoord().longitude;
+                location[1] = mapPoint.getMapPointGeoCoord().latitude;
+                Intent intent = new Intent(v.getContext(), WriteActivity.class);
+                intent.putExtra("longitude", location[0]);
+                intent.putExtra("latitude", location[1]);
+                startActivity(intent);
+            }
+        };
+        fab.setOnClickListener(mClickListener);
         return view;
     }
 
