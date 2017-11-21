@@ -21,7 +21,7 @@ public class MyQuestion extends AppCompatActivity implements SwipeRefreshLayout.
         adapter = new ListViewAdapter() ;
 
         // 리스트뷰 참조 및 Adapter달기
-        listview = findViewById(R.id.myQuestionList);
+        listview = (ListView)findViewById(R.id.myQuestionList);
         listview.setAdapter(adapter);
         adapter.addItem("1", "테스트", "내용");
         adapter.addItem("2", "테스트", "내용");
@@ -32,7 +32,7 @@ public class MyQuestion extends AppCompatActivity implements SwipeRefreshLayout.
         adapter.addItem("7", "테스트", "내용");
         adapter.notifyDataSetChanged();
 
-        mSwipeRefreshLayout = findViewById(R.id.swipe_refresh);
+        mSwipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh);
         mSwipeRefreshLayout.setOnRefreshListener(this);
     }
 
