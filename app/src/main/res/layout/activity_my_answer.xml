@@ -1,55 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="kr.co.mapchat.UserData.MyAnswer">
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/listView"
-        android:layout_width="369dp"
-        android:layout_height="336dp"
-        android:paddingBottom="@dimen/activity_vertical_margin"
-        android:paddingLeft="@dimen/activity_horizontal_margin"
-        android:paddingRight="@dimen/activity_horizontal_margin"
-        android:paddingTop="@dimen/activity_vertical_margin"
-        android:orientation="vertical"
-        tools:context="kr.co.mapchat.UserData.MyAnswer"
-        tools:layout_editor_absoluteY="102dp"
-        tools:layout_editor_absoluteX="8dp">
-
-        <ScrollView
-            android:id="@+id/scrollView"
+    tools:context="kr.co.mapchat.UserData.MyQuestion">
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ListView
+            android:id="@+id/myQuestionList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:divider="#FFFFFF"
+            android:dividerHeight="1.5dp"
+            android:textSize="15dp"/>
+    </android.support.v4.widget.SwipeRefreshLayout>
 
-            <LinearLayout
-                android:id="@+id/itemList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"></LinearLayout>
-        </ScrollView>
-    </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="187dp"
-        android:layout_height="36dp"
-        android:text="MyAnswer"
-        android:textSize="10pt"
-        tools:layout_editor_absoluteX="9dp"
-        tools:layout_editor_absoluteY="16dp"
-        tools:text="My Answer List" />
+    <com.github.clans.fab.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/ic_delete_black_48dp"
+        app:fab_colorNormal="@color/WHITE"
+        app:fab_colorPressed="@color/light_gray"
+        app:fab_colorRipple="@color/dimgray" />
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="AnswerDelete"
-        tools:layout_editor_absoluteX="291dp"
-        tools:layout_editor_absoluteY="447dp"
-        tools:text="Delete" />
-
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

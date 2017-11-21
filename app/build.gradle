@@ -10,6 +10,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        vectorDrawables.useSupportLibrary = true
     }
     buildTypes {
         release {
@@ -23,25 +24,29 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:support-vector-drawable:26.1.0'
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:26.0.0-alpha1'
+    compile 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.github.clans:fab:1.6.4'
-    compile 'com.android.support:design:26.0.0-alpha1'
-    compile 'com.android.support:support-v4:26.0.0-alpha1'
+    compile 'com.android.support:design:26.1.0'
+    compile 'com.android.support:support-v4:26.1.0'
     compile files('libs/libDaumMapAndroid.jar')
     compile files('libs/AndroidSwipeLayout-v1.1.8.jar')
-    compile 'com.android.support:support-compat:26.0.0-alpha1'
+    compile 'com.android.support:support-compat:26.1.0'
     compile 'com.daimajia.easing:library:2.0@aar'
     compile 'com.daimajia.androidanimations:library:2.3@aar'
+    compile 'uk.co.chrisjenx:calligraphy:2.2.0'
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:recyclerview-v7:26.0.0-alpha1'
+    compile 'com.android.support:recyclerview-v7:26.1.0'
     compile 'org.projectlombok:lombok:1.16.18'
     provided 'org.glassfish:javax.annotation:10.0-b28'
     compile 'com.google.firebase:firebase-database:9.2.1'
     compile 'com.google.firebase:firebase-messaging:10.0.0'
 }
+
+
 
 apply plugin: 'com.google.gms.google-services'
