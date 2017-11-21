@@ -23,7 +23,7 @@ import static android.view.KeyEvent.ACTION_UP;
 
 public class FragmentMap extends Fragment implements MapView.MapViewEventListener{
     CodeConfig codeConfig = new CodeConfig();
-    private MapView mapView;
+    MapView mapView;
     RelativeLayout mapViewContainer;
     View view;
 
