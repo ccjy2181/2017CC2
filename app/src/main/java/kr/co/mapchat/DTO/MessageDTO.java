@@ -5,4 +5,5 @@ import lombok.Setter;
 
 @Data
 public class MessageDTO {
+    private String title;
 }
