@@ -10,15 +10,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.CameraUpdate;
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
+import net.daum.mf.map.api.MapView;
 
 import kr.co.mapchat.R;
 import kr.co.mapchat.UserData.AllQuestion;
@@ -29,12 +25,11 @@ import kr.co.mapchat.UserData.MyQuestion;
 import kr.co.mapchat.UserData.UserRank;
 
 public class MapsActivity extends AppCompatActivity
-implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
+implements NavigationView.OnNavigationItemSelectedListener {
 
-    private GoogleMap mMap;
-    private String initAdd;
     private final long FINISH_INTERVAL_TIME = 2000;
     private long backPressedTime = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,10 +37,12 @@ implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
         setContentView(R.layout.activity_maps);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
+        MapView mapView = new MapView(this);
+
+        RelativeLayout mapViewContainer = (RelativeLayout)findViewById(R.id.map_view);
+        mapViewContainer.addView(mapView);
+        mapView.setMapTilePersistentCacheEnabled(true);
+
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -79,20 +76,7 @@ implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
      * it inside the SupportMapFragment. This method will only be triggered once the user has
      * installed Google Play services and returned to the app.
      */
-    //지도 초기설정
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
 
-        mMap.getUiSettings().setMapToolbarEnabled(false);
-        LatLng Yongin = new LatLng(37.2410347, 127.177954);
-
-        mMap.addMarker(new MarkerOptions().position(Yongin).title(initAdd).position(Yongin)).showInfoWindow();
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(Yongin));
-
-        CameraUpdate zoom = CameraUpdateFactory.zoomTo(10);
-        mMap.animateCamera(zoom);
-    }
 
 //    @Override
 //    public boolean onCreateOptionsMenu(Menu menu) {
