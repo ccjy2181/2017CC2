@@ -45,14 +45,10 @@
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity android:name=".UserData.MyAnswer" />
         <activity android:name=".UserData.MyInfo" />
-        <activity android:name=".UserData.MyQuestion" />
+        <activity android:name=".UserData.MyQuestion"/>
         <activity android:name=".UserData.AllQuestion" />
         <activity android:name=".UserData.MyBookMark" />
         <activity android:name=".UserData.UserRank" />
-        <activity
-            android:name=".LoginActivity"
-            android:label="@string/title_activity_login" />
-        <activity android:name=".Login.SignupActivity"></activity>
     </application>
 
 </manifest>
