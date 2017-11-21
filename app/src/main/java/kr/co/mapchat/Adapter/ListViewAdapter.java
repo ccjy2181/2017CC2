@@ -5,76 +5,73 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import java.util.ArrayList;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+import com.daimajia.swipe.SimpleSwipeListener;
+import com.daimajia.swipe.SwipeLayout;
+import com.daimajia.swipe.adapters.BaseSwipeAdapter;
 
 import kr.co.mapchat.R;
 
-public class ListViewAdapter extends BaseAdapter {
-    // Adapter에 추가된 데이터를 저장하기 위한 ArrayList
-    private ArrayList<ListViewItem> listViewItemList = new ArrayList<ListViewItem>() ;
+public class ListViewAdapter extends BaseSwipeAdapter {
 
-    // ListViewAdapter의 생성자
-    public ListViewAdapter() {
+    private Context mContext;
 
+    public ListViewAdapter(Context mContext) {
+        this.mContext = mContext;
     }
 
-    // Adapter에 사용되는 데이터의 개수를 리턴. : 필수 구현
+    @Override
+    public int getSwipeLayoutResourceId(int position) {
+        return R.id.swipe;
+    }
+
+    @Override
+    public View generateView(int position, ViewGroup parent) {
+        View v = LayoutInflater.from(mContext).inflate(R.layout.listview_item, null);
+        SwipeLayout swipeLayout = (SwipeLayout)v.findViewById(getSwipeLayoutResourceId(position));
+        swipeLayout.addSwipeListener(new SimpleSwipeListener() {
+            @Override
+            public void onOpen(SwipeLayout layout) {
+                YoYo.with(Techniques.Tada).duration(500).delay(100).playOn(layout.findViewById(R.id.trash));
+            }
+        });
+        swipeLayout.setOnDoubleClickListener(new SwipeLayout.DoubleClickListener() {
+            @Override
+            public void onDoubleClick(SwipeLayout layout, boolean surface) {
+                Toast.makeText(mContext, "DoubleClick", Toast.LENGTH_SHORT).show();
+            }
+        });
+        v.findViewById(R.id.delete).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mContext, "click delete", Toast.LENGTH_SHORT).show();
+            }
+        });
+        return v;
+    }
+
+    @Override
+    public void fillValues(int position, View convertView) {
+        TextView t = (TextView)convertView.findViewById(R.id.position);
+        t.setText((position + 1) + ".");
+    }
+
     @Override
     public int getCount() {
-        return listViewItemList.size() ;
+        return 50;
     }
 
-    // position에 위치한 데이터를 화면에 출력하는데 사용될 View를 리턴. : 필수 구현
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        final int pos = position;
-        final Context context = parent.getContext();
-
-        // "listview_item" Layout을 inflate하여 convertView 참조 획득.
-        if (convertView == null) {
-            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.listview_item, parent, false);
-        }
-
-        // 화면에 표시될 View(Layout이 inflate된)으로부터 위젯에 대한 참조 획득
-        TextView idTextView = (TextView) convertView.findViewById(R.id.id_list) ;
-        TextView titleTextView = (TextView) convertView.findViewById(R.id.title_list) ;
-        TextView contentTextView = (TextView) convertView.findViewById(R.id.content_list) ;
-
-        // Data Set(listViewItemList)에서 position에 위치한 데이터 참조 획득
-        ListViewItem listViewItem = listViewItemList.get(position);
-
-        // 아이템 내 각 위젯에 데이터 반영
-        idTextView.setText(listViewItem.getId());
-        titleTextView.setText(listViewItem.getTitle());
-        contentTextView.setText(listViewItem.getContent());
-
-        return convertView;
-    }
-
-    // 지정한 위치(position)에 있는 데이터와 관계된 아이템(row)의 ID를 리턴. : 필수 구현
-    @Override
-    public long getItemId(int position) {
-        return position ;
-    }
-
-    // 지정한 위치(position)에 있는 데이터 리턴 : 필수 구현
     @Override
     public Object getItem(int position) {
-        return listViewItemList.get(position) ;
+        return null;
     }
 
-    // 아이템 데이터 추가를 위한 함수. 개발자가 원하는대로 작성 가능.
-    public void addItem(String id, String title, String content) {
-        ListViewItem item = new ListViewItem();
-
-        item.setId(id);
-        item.setTitle(title);
-        item.setContent(content);
-
-        listViewItemList.add(item);
+    @Override
+    public long getItemId(int position) {
+        return position;
     }
 }

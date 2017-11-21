@@ -34,6 +34,7 @@ public class MyQuestion extends AppCompatActivity implements SwipeRefreshLayout.
 
         mSwipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.swipe_refresh);
         mSwipeRefreshLayout.setOnRefreshListener(this);
+
     }
 
     @Override
