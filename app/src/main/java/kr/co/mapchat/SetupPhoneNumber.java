@@ -13,12 +13,18 @@ public class SetupPhoneNumber extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setup_phone_number);
 
-        setupToolbar(R.id.toolbar, "Setting Messenger");
-        Button button = (Button) findViewById(R.id.bt_continue);
+        setupToolbar(R.id.toolbar, "반갑습니다!");
+        Button button = (Button) findViewById(R.id.bt_auth);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(SetupPhoneNumber.this, MainActivity.class));
+                PhoneAuthProvider.getInstance().verifyPhoneNumber(
+                        phoneNumber,        // Phone number to verify
+                        60,                 // Timeout duration
+                        TimeUnit.SECONDS,   // Unit of timeout
+                        this,               // Activity (for callback binding)
+                        mCallbacks);        // OnVerificationStateChangedCallbacks
+                //startActivity(new Intent(SetupPhoneNumber.this, MainActivity.class));
             }
         });
     }

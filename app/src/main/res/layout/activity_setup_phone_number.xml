@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="kr.co.mapchat.SetupPhoneNumber"
+    tools:context="com.uiresource.messenger.SetupPhoneNumber"
     android:fitsSystemWindows="true">
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -29,51 +29,45 @@
                 android:id="@+id/tv_info"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Your phone number"
+                android:text="MapChat 회원가입"
                 android:layout_centerHorizontal="true"
                 style="@style/h2"
                 android:textAppearance="@style/Light"/>
-            <TextView
-                android:id="@+id/tv_country"
+            <EditText
+                android:id="@+id/et_phone"
                 android:layout_below="@id/tv_info"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:drawableRight="@drawable/ic_arrow_right"
-                android:text="Indonesia (+62)"
                 android:layout_marginTop="@dimen/space20"
-                style="@style/EditText"
-                android:textAppearance="@style/ExtraLight"/>
-            <EditText
-                android:id="@+id/et_phone"
-                android:layout_below="@id/tv_country"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Phone number"
-                android:inputType="phone"
+                android:hint="('-'를 제외하고 입력해 주세요.)"
+                android:inputType="number"
+                android:digits="0123456789"
                 style="@style/EditText"
                 android:focusable="true"
+                android:textAppearance="@style/ExtraLight"/>
+            <Button
+                android:id="@+id/bt_auth"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="@dimen/space20"
+                android:text="인증번호 받기"
+                style="@style/ButtonGreen"
                 android:textAppearance="@style/ExtraLight"/>
             <TextView
                 android:id="@+id/tv_info_confirm"
                 android:layout_below="@id/et_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Please confirm your country code and enter your phone number"
+                android:text="입력하신 번호로 인증번호가 전송됩니다."
                 android:gravity="center_horizontal"
+                android:layout_marginTop="@dimen/space20"
                 android:paddingLeft="@dimen/spaceLR"
                 android:paddingRight="@dimen/spaceLR"
                 android:paddingTop="@dimen/space20"
                 android:paddingBottom="@dimen/space20"
                 style="@style/h3Info"
                 android:background="@drawable/bg_top_grey"
-                android:textAppearance="@style/ExtraLight"/>
-            <Button
-                android:id="@+id/bt_continue"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:text="Continue"
-                style="@style/ButtonPink"
                 android:textAppearance="@style/ExtraLight"/>
         </RelativeLayout>
     </ScrollView>
