@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/map_layout"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="kr.co.mapchat.Map.MapsActivity"
-    tools:showIn="@layout/app_bar_sidebar">
+    tools:context="kr.co.mapchat.FragmentMap">
 
     <RelativeLayout
         android:id="@+id/map_view"
@@ -30,16 +29,5 @@
         android:layout_marginTop="@dimen/fab_margin"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
-
-
-    <!--<ImageView-->
-        <!--android:id="@+id/marker"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_centerInParent="true"-->
-        <!--android:layout_gravity="center_vertical|center_horizontal"-->
-        <!--android:src="@drawable/map_marker"-->
-        <!--app:layout_anchor="@+id/map"-->
-        <!--app:layout_anchorGravity="center_vertical|center_horizontal" />-->
 
 </android.support.design.widget.CoordinatorLayout>

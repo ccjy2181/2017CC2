@@ -1,5 +1,6 @@
 package kr.co.mapchat;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
@@ -111,7 +112,10 @@ public class MainActivity extends BaseActivity
             FragmentHome fragmentHome = new FragmentHome();
             ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.frameLayout, fragmentHome).commit();
-        } else if (id == R.id.nav_trash) {
+        } else if (id == R.id.nav_map) {
+            FragmentMap fragmentMap = new FragmentMap();
+            ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.frameLayout, fragmentMap).commit();
         } else if (id == R.id.nav_settings) {
         } else if (id == R.id.nav_logout) {
         }
@@ -122,5 +126,13 @@ public class MainActivity extends BaseActivity
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         return super.onPrepareOptionsMenu(menu);
+    }
+
+    public boolean onHeaderItemSelected(View view) {
+        // Handle navigation view item clicks here.
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
 }
