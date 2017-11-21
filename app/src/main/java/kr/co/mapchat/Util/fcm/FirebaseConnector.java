@@ -1,4 +1,4 @@
-package kr.co.mapchat.Util;
+package kr.co.mapchat.Util.fcm;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;

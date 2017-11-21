@@ -4,12 +4,11 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 import kr.co.mapchat.DTO.UserDTO;
 import kr.co.mapchat.Map.MapsActivity;
-import kr.co.mapchat.Util.FirebaseConnector;
+import kr.co.mapchat.Util.fcm.FirebaseConnector;
 
 //로딩화면 2초후 메인엑티비티전환
 
