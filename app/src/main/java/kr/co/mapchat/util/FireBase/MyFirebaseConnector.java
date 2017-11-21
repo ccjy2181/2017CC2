@@ -12,7 +12,9 @@ public class MyFirebaseConnector {
         this.table = table;
     }
 
-    public void insertData(Object obj){
-        databaseReference.child(table).push().setValue(obj);
+    public DatabaseReference insertData(Object obj){
+        DatabaseReference resultData = databaseReference.child(table).push();
+        resultData.setValue(obj);
+        return resultData;
     }
 }

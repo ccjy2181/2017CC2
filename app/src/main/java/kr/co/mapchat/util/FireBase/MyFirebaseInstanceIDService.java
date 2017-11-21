@@ -1,5 +1,8 @@
 package kr.co.mapchat.util.FireBase;
 
+import android.content.SharedPreferences;
+
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.FirebaseInstanceIdService;
 
@@ -23,6 +26,8 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         userDTO.setToken(refreshedToken);
         userDTO.setRegdate(new Date());
         MyFirebaseConnector myFirebaseConnector = new MyFirebaseConnector("user");
-        myFirebaseConnector.insertData(userDTO);
+        DatabaseReference resultData = myFirebaseConnector.insertData(userDTO);
+        SharedPreferences prefs = this.getSharedPreferences("user", MODE_PRIVATE);
+        prefs.edit().putString("token", resultData.getKey());
     }
 }
