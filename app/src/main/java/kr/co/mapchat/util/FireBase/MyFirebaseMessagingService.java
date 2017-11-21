@@ -6,6 +6,7 @@ import com.google.firebase.messaging.RemoteMessage;
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
+        System.out.println("###########################");
         String title = "";
         String message = "";
         if( remoteMessage.getNotification() == null   ){

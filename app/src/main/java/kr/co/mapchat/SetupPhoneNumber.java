@@ -18,13 +18,7 @@ public class SetupPhoneNumber extends BaseActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                PhoneAuthProvider.getInstance().verifyPhoneNumber(
-                        phoneNumber,        // Phone number to verify
-                        60,                 // Timeout duration
-                        TimeUnit.SECONDS,   // Unit of timeout
-                        this,               // Activity (for callback binding)
-                        mCallbacks);        // OnVerificationStateChangedCallbacks
-                //startActivity(new Intent(SetupPhoneNumber.this, MainActivity.class));
+                startActivity(new Intent(SetupPhoneNumber.this, MainActivity.class));
             }
         });
     }
