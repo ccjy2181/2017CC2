@@ -40,11 +40,11 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_map, container, false);
 
-        mapView = new MapView(this.getContext());
         getActivity().supportInvalidateOptionsMenu();
         ((MainActivity)getActivity()).changeTitle(R.id.toolbar, "Map");
 
         mapViewContainer = (RelativeLayout)view.findViewById(R.id.map_view);
+
 
         return view;
     }
@@ -65,6 +65,20 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
         mapView = new MapView(view.getContext());
 
         mapViewContainer.addView(mapView, 0);
+    }
+
+    @Override
+    public void onResume() {
+        if(mapViewContainer.indexOfChild(mapView) == -1) {
+            initMapView();
+        }
+        super.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        mapViewContainer.removeView(mapView);
+        super.onPause();
     }
 
     // MapView.MapViewEventListener
