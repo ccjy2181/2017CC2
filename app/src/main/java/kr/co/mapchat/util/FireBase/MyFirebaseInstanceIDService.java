@@ -27,7 +27,9 @@ public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
         userDTO.setRegdate(new Date());
         MyFirebaseConnector myFirebaseConnector = new MyFirebaseConnector("user");
         DatabaseReference resultData = myFirebaseConnector.insertData(userDTO);
-        SharedPreferences prefs = this.getSharedPreferences("user", MODE_PRIVATE);
-        prefs.edit().putString("token", resultData.getKey());
+        SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString("token", resultData.getKey());
+        editor.commit();
     }
 }

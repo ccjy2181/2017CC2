@@ -1,6 +1,7 @@
 package kr.co.mapchat;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.DragEvent;
@@ -14,6 +15,9 @@ import android.widget.TextView;
 
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
+
+import kr.co.mapchat.DTO.MessageDTO;
+import kr.co.mapchat.util.FireBase.MyFirebaseConnector;
 
 import static net.daum.mf.map.api.MapPoint.mapPointWithGeoCoord;
 
@@ -65,34 +69,43 @@ public class WriteActivity extends AppCompatActivity {
         int area_int = 0;
         Spinner area = (Spinner)findViewById(R.id.area);
         String area_str = area.getSelectedItem().toString();
-        if(area_str == "100m"){
+        if(area_str.equals("100m")){
             area_int = 100;
-        } else if (area_str == "300m"){
+        } else if (area_str.equals("300m")){
             area_int = 300;
-        } else if (area_str == "500m"){
+        } else if (area_str.equals("500m")){
             area_int = 500;
-        } else if (area_str == "1km"){
+        } else if (area_str.equals("1km")){
             area_int = 1000;
         }
 
         return area_int;
     }
 
-    public String getTitle(){
+    public String getTitleInput(){
         EditText title = (EditText)findViewById(R.id.write_title);
         String title_str = title.getText().toString();
         return title_str;
     }
 
-    public String getContent(){
+    public String getContentInput(){
         EditText content = (EditText)findViewById(R.id.write_content);
         String content_str = content.getText().toString();
         return content_str;
     }
 
     public void ButtonWriteClicked(View view) {
+        SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
+        MessageDTO messageDTO = new MessageDTO();
+        messageDTO.setUser(prefs.getString("token", ""));
+        messageDTO.setTitle(getTitleInput());
+        messageDTO.setContents(getContentInput());
+        messageDTO.setRange(getArea());
+        messageDTO.setLocation_latitude(latitude);
+        messageDTO.setLocation_longitude(longitude);
 
-        // Firebase에 넣기!
+        MyFirebaseConnector myFirebaseConnector = new MyFirebaseConnector("message");
+        myFirebaseConnector.insertData(messageDTO);
 
         mapViewContainer.removeView(mapView);
         finish();

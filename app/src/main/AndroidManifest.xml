@@ -45,6 +45,9 @@
         <activity
             android:name=".Conversation"
             android:theme="@style/AppTheme.Trans"/>
+        <activity
+            android:name=".WriteActivity"
+            android:theme="@style/AppTheme.Trans"/>
 
         <service android:name=".util.FireBase.MyFirebaseMessagingService">
             <intent-filter>
