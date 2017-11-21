@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import kr.co.mapchat.Adapter.ListViewAdapter;
-import kr.co.mapchat.R;
 
 public class MyQuestion extends AppCompatActivity implements SwipeRefreshLayout.OnRefreshListener {
 
