@@ -41,7 +41,6 @@ implements NavigationView.OnNavigationItemSelectedListener {
 
         RelativeLayout mapViewContainer = (RelativeLayout)findViewById(R.id.map_view);
         mapViewContainer.addView(mapView);
-        //mapView.setMapTilePersistentCacheEnabled(true);
 
 
         final DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

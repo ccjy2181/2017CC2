@@ -7,8 +7,13 @@
          Google Maps Android API v2, but you must specify either coarse or fine
          location permissions for the 'MyLocation' functionality. 
     -->
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
         android:allowBackup="true"
@@ -30,8 +35,9 @@
             </intent-filter>
         </activity>
 
-
-        <meta-data android:name="com.kakao.sdk.AppKey" android:value="f7463307e96ec8803cdb9190cd4678ea"/>
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="f7463307e96ec8803cdb9190cd4678ea" />
 
         <activity
             android:name=".Map.MapsActivity"
@@ -42,7 +48,11 @@
         <activity android:name=".UserData.MyQuestion" />
         <activity android:name=".UserData.AllQuestion" />
         <activity android:name=".UserData.MyBookMark" />
-        <activity android:name=".UserData.UserRank"/>
+        <activity android:name=".UserData.UserRank" />
+        <activity
+            android:name=".LoginActivity"
+            android:label="@string/title_activity_login" />
+        <activity android:name=".Login.SignupActivity"></activity>
     </application>
 
 </manifest>
