@@ -2,6 +2,7 @@ package kr.co.mapchat.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -64,19 +65,19 @@ public class FragmentMyQuestion extends Fragment implements ChatAdapter.ViewHold
 
         // 초기 셋팅 + 파일 추가시 갱신해야함
 
-//        String name[]= {"Laura Owens", "Angela Price", "Donald Turner", "Kelly", "Julia Harris", "Laura Owens", "Angela Price", "Donald Turner", "Kelly", "Julia Harris" };
-//        String lastchat[]= {"Hi Laura Owens", "Hi there how are you", "Can we meet?", "Ow this awesome", "How are you?", "Ow this awesome", "How are you?", "Ow this awesome", "How are you?", "How are you?" };
-//        @DrawableRes int img[]= {R.drawable.userpic , R.drawable.user1, R.drawable.user2, R.drawable.user3, R.drawable.user4 , R.drawable.userpic , R.drawable.user1, R.drawable.user2, R.drawable.user3, R.drawable.user4 };
-//        boolean online[] = {true, false, true, false, true, true, true, false, false, true};
-//
-//        for (int i = 0; i<10; i++){
+        String name[]= {"Laura Owens", "Angela Price", "Donald Turner", "Kelly", "Julia Harris", "Laura Owens", "Angela Price", "Donald Turner", "Kelly", "Julia Harris" };
+        @DrawableRes int img[]= {R.drawable.userpic , R.drawable.user1, R.drawable.user2, R.drawable.user3, R.drawable.user4 , R.drawable.userpic , R.drawable.user1, R.drawable.user2, R.drawable.user3, R.drawable.user4 };
+        boolean online[] = {true, false, true, false, true, true, true, false, false, true};
+        String lastchat[]= {"Hi Laura Owens", "Hi there how are you", "Can we meet?", "Ow this awesome", "How are you?", "Ow this awesome", "How are you?", "Ow this awesome", "How are you?", "How are you?" };
+
+        for (int i = 0; i<10; i++){
 
 
-//            Chat chat = addChat(~~~~~~);
+            Chat chat = addChat(name[i], img[i], online[i], lastchat[i]);
 
 
-//            data.add(chat);
-//        }
+            data.add(chat);
+        }
         return data;
     }
 
