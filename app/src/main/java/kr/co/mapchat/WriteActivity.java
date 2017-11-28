@@ -33,6 +33,8 @@ public class WriteActivity extends Activity implements MapView.MapViewEventListe
     RelativeLayout mapViewContainer;
     MapPoint mapPoint;
 
+    MyFirebaseConnector myFirebaseConnector;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
@@ -44,6 +46,9 @@ public class WriteActivity extends Activity implements MapView.MapViewEventListe
         longitude = intent.getDoubleExtra("longitude",0);
         latitude = intent.getDoubleExtra("latitude",0);
         super.onCreate(savedInstanceState);
+
+        myFirebaseConnector = new MyFirebaseConnector("message");
+        myFirebaseConnector.getData();
 
         mapView = new MapView(this);
         mapViewContainer = (RelativeLayout)findViewById(R.id.write_map);
@@ -124,7 +129,6 @@ public class WriteActivity extends Activity implements MapView.MapViewEventListe
         messageDTO.setLocation_latitude(latitude);
         messageDTO.setLocation_longitude(longitude);
 
-        MyFirebaseConnector myFirebaseConnector = new MyFirebaseConnector("message");
         myFirebaseConnector.insertData(messageDTO);
 
         mapViewContainer.removeView(mapView);
