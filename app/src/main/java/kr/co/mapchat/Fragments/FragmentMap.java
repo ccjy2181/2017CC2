@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 
 import com.github.clans.fab.FloatingActionButton;
 
+import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
@@ -78,6 +79,21 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
         return true;
     }
 
+    public void addMarker(MapPoint mapPoint){
+        MapPOIItem marker = new MapPOIItem();
+        marker.setItemName("Default Marker");
+        marker.setTag(0);
+        // 좌표값 지정
+        marker.setMapPoint(mapPoint);
+        // 특정 값 주기 (문제에 대한 int 순서값, 제목 등등 Object 전부 가능)
+//        marker.setUserObject(code);
+
+        marker.setMarkerType(MapPOIItem.MarkerType.BluePin);
+        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
+
+        mapView.addPOIItem(marker);
+    }
+
     public void resetFragment(){
         mapViewContainer.removeView(mapView);
         if(mapViewContainer.indexOfChild(mapView) == -1) {
@@ -89,6 +105,9 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
         mapView = new MapView(view.getContext());
 
         mapViewContainer.addView(mapView, 0);
+
+        MapPoint mapPoint2 = MapPoint.mapPointWithGeoCoord(37.56640625, 126.97787475585938);
+        addMarker(mapPoint2);
     }
 
     @Override

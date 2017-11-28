@@ -107,6 +107,7 @@ public class WriteActivity extends Activity implements MapView.MapViewEventListe
         return area_int;
     }
 
+
     public String getTitleInput(){
         EditText title = (EditText)findViewById(R.id.write_title);
         String title_str = title.getText().toString();
