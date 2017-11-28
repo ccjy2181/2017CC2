@@ -23,6 +23,7 @@ import kr.co.mapchat.CodeConfig;
 import kr.co.mapchat.MainActivity;
 import kr.co.mapchat.R;
 import kr.co.mapchat.WriteActivity;
+import kr.co.mapchat.util.FireBase.MyFirebaseConnector;
 
 import static android.view.KeyEvent.ACTION_UP;
 
@@ -32,6 +33,8 @@ import static android.view.KeyEvent.ACTION_UP;
  */
 
 public class FragmentMap extends Fragment implements MapView.MapViewEventListener{
+    MyFirebaseConnector myFirebaseConnector;
+
     CodeConfig codeConfig = new CodeConfig();
     MapView mapView;
     RelativeLayout mapViewContainer;
@@ -79,20 +82,20 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
         return true;
     }
 
-    public void addMarker(MapPoint mapPoint){
-        MapPOIItem marker = new MapPOIItem();
-        marker.setItemName("Default Marker");
-        marker.setTag(0);
-        // 좌표값 지정
-        marker.setMapPoint(mapPoint);
-        // 특정 값 주기 (문제에 대한 int 순서값, 제목 등등 Object 전부 가능)
-//        marker.setUserObject(code);
-
-        marker.setMarkerType(MapPOIItem.MarkerType.BluePin);
-        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
-
-        mapView.addPOIItem(marker);
-    }
+//    public void addMarker(MapPoint mapPoint){
+//        MapPOIItem marker = new MapPOIItem();
+//        marker.setItemName("Default Marker");
+//        marker.setTag(0);
+//        // 좌표값 지정
+//        marker.setMapPoint(mapPoint);
+//        // 특정 값 주기 (문제에 대한 int 순서값, 제목 등등 Object 전부 가능)
+////        marker.setUserObject(code);
+//
+//        marker.setMarkerType(MapPOIItem.MarkerType.BluePin);
+//        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
+//
+//        mapView.addPOIItem(marker);
+//    }
 
     public void resetFragment(){
         mapViewContainer.removeView(mapView);
@@ -106,8 +109,9 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
 
         mapViewContainer.addView(mapView, 0);
 
-        MapPoint mapPoint2 = MapPoint.mapPointWithGeoCoord(37.56640625, 126.97787475585938);
-        addMarker(mapPoint2);
+        MapPOIItem marker = new MapPOIItem();
+        myFirebaseConnector = new MyFirebaseConnector("message");
+        myFirebaseConnector.getMarkerData(mapView, marker);
     }
 
     @Override

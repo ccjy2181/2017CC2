@@ -47,9 +47,6 @@ public class WriteActivity extends Activity implements MapView.MapViewEventListe
         latitude = intent.getDoubleExtra("latitude",0);
         super.onCreate(savedInstanceState);
 
-        myFirebaseConnector = new MyFirebaseConnector("message");
-        myFirebaseConnector.getData();
-
         mapView = new MapView(this);
         mapViewContainer = (RelativeLayout)findViewById(R.id.write_map);
         mapViewContainer.addView(mapView);

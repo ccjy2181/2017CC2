@@ -51,6 +51,14 @@ public class MainActivity extends BaseActivity
         navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+        View headerview = navigationView.getHeaderView(0);
+        headerview.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onHeaderItemSelected(v);
+            }
+        });
+
         navigationViewBottom = (NavigationView) findViewById(R.id.nav_view_bottom);
         navigationViewBottom.setNavigationItemSelectedListener(this);
 
@@ -133,7 +141,6 @@ public class MainActivity extends BaseActivity
 
     public boolean onHeaderItemSelected(View view) {
         // Handle navigation view item clicks here.
-
         FragmentTransaction ft;
         FragmentMyInfo fragmentMyInfo = new FragmentMyInfo();
         ft = getSupportFragmentManager().beginTransaction();
