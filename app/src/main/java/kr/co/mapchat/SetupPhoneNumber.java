@@ -19,6 +19,7 @@ public class SetupPhoneNumber extends BaseActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(SetupPhoneNumber.this, MainActivity.class));
+                finish();
             }
         });
     }

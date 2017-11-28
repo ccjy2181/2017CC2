@@ -1,9 +1,12 @@
 package kr.co.mapchat;
 
+import android.content.DialogInterface;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.view.Gravity;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -12,12 +15,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 import android.widget.TextView;
 
 import net.daum.mf.map.api.MapPoint;
 
 import kr.co.mapchat.Fragments.FragmentContacts;
-import kr.co.mapchat.Fragments.FragmentHome;
+import kr.co.mapchat.Fragments.FragmentMyQuestion;
 import kr.co.mapchat.Fragments.FragmentMap;
 import kr.co.mapchat.Fragments.FragmentMyInfo;
 
@@ -27,6 +31,7 @@ public class MainActivity extends BaseActivity
     NavigationView navigationView, navigationViewBottom;
     DrawerLayout drawer;
     MapPoint current_mp;
+    AlertDialog dialog;
 
     double[] location = {0,0};
 
@@ -86,7 +91,28 @@ public class MainActivity extends BaseActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);     // 여기서 this는 Activity의 this
+
+            // 여기서 부터는 알림창의 속성 설정
+            builder.setMessage("앱을 종료하시겠습니까?")        // 메세지 설정
+                    .setCancelable(false)        // 뒤로 버튼 클릭시 취소 가능 설정
+                    .setPositiveButton("확인", new DialogInterface.OnClickListener(){
+                        // 확인 버튼 클릭시 설정
+                        public void onClick(DialogInterface dialog, int whichButton){
+                            MainActivity.super.onBackPressed();
+                        }
+                    })
+                    .setNegativeButton("취소", new DialogInterface.OnClickListener(){
+                        // 취소 버튼 클릭시 설정
+                        public void onClick(DialogInterface dialog, int whichButton){
+                            dialog.cancel();
+                        }
+                    });
+
+            AlertDialog dialog = builder.create();    // 알림창 객체 생성
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setCanceledOnTouchOutside(true);
+            dialog.show();    // 알림창 띄우기
         }
     }
 
@@ -118,9 +144,9 @@ public class MainActivity extends BaseActivity
             ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.frameLayout, fragmentMap).addToBackStack(null).commit();
         } else if (id == R.id.nav_my_question) {
-            FragmentHome fragmentHome = new FragmentHome();
+            FragmentMyQuestion fragmentMyQuestion = new FragmentMyQuestion();
             ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.frameLayout, fragmentHome).commit();
+            ft.replace(R.id.frameLayout, fragmentMyQuestion).commit();
         } else if (id == R.id.nav_my_answer) {
             FragmentContacts fragmentContacts = new FragmentContacts();
             ft = getSupportFragmentManager().beginTransaction();
@@ -128,7 +154,8 @@ public class MainActivity extends BaseActivity
         } else if (id == R.id.nav_bookmark) {
         } else if (id == R.id.nav_rank) {
         } else if (id == R.id.nav_manage){
-        } else if (id == R.id.nav_logout){
+        } else if (id == R.id.nav_exit){
+            super.onBackPressed();
         }
 
         drawer.closeDrawer(GravityCompat.START);

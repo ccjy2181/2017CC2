@@ -55,7 +55,7 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
         view = inflater.inflate(R.layout.fragment_map, container, false);
 
         getActivity().supportInvalidateOptionsMenu();
-        ((MainActivity)getActivity()).changeTitle(R.id.toolbar, "Map");
+        ((MainActivity)getActivity()).changeTitle(R.id.toolbar, "실시간 질문");
 
         mapViewContainer = (RelativeLayout)view.findViewById(R.id.map_view);
 
