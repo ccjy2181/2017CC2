@@ -1,4 +1,4 @@
-package kr.co.mapchat;
+package kr.co.mapchat.Fragments;
 
 import android.os.Bundle;
 import android.support.annotation.DrawableRes;
@@ -12,6 +12,8 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import kr.co.mapchat.MainActivity;
+import kr.co.mapchat.R;
 import kr.co.mapchat.recyclerview.Contact;
 import kr.co.mapchat.recyclerview.ContactAdapter;
 
@@ -81,8 +83,4 @@ public class FragmentContacts extends Fragment implements ContactAdapter.ViewHol
         mAdapter.toggleSelection (position);
     }
 
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.clear();
-        inflater.inflate(R.menu.menu_add, menu);
-    }
 }

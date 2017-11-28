@@ -1,4 +1,4 @@
-package kr.co.mapchat;
+package kr.co.mapchat.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,11 @@ import com.github.clans.fab.FloatingActionButton;
 
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
+
+import kr.co.mapchat.CodeConfig;
+import kr.co.mapchat.MainActivity;
+import kr.co.mapchat.R;
+import kr.co.mapchat.WriteActivity;
 
 import static android.view.KeyEvent.ACTION_UP;
 
@@ -49,25 +55,27 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
 
         mapViewContainer = (RelativeLayout)view.findViewById(R.id.map_view);
 
-        FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.write_btn);
-        FloatingActionButton.OnClickListener mClickListener = new View.OnClickListener() {
-            public void onClick(View v) {
-                mapPoint = mapView.getMapCenterPoint();
-                location[0] = mapPoint.getMapPointGeoCoord().longitude;
-                location[1] = mapPoint.getMapPointGeoCoord().latitude;
-                Intent intent = new Intent(v.getContext(), WriteActivity.class);
-                intent.putExtra("longitude", location[0]);
-                intent.putExtra("latitude", location[1]);
-                startActivity(intent);
-            }
-        };
-        fab.setOnClickListener(mClickListener);
         return view;
     }
 
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         menu.clear();
         inflater.inflate(R.menu.menu_edit, menu);
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        int id = item.getItemId();
+        if(id == R.id.new_chat){
+            mapPoint = mapView.getMapCenterPoint();
+            location[0] = mapPoint.getMapPointGeoCoord().longitude;
+            location[1] = mapPoint.getMapPointGeoCoord().latitude;
+            Intent intent = new Intent(getContext(), WriteActivity.class);
+            intent.putExtra("longitude", location[0]);
+            intent.putExtra("latitude", location[1]);
+            startActivity(intent);
+            mapViewContainer.removeView(mapView);
+        }
+        return true;
     }
 
     public void resetFragment(){

@@ -1,4 +1,4 @@
-package kr.co.mapchat;
+package kr.co.mapchat.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +16,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import kr.co.mapchat.Conversation;
+import kr.co.mapchat.MainActivity;
+import kr.co.mapchat.R;
 import kr.co.mapchat.recyclerview.Chat;
 import kr.co.mapchat.recyclerview.ChatAdapter;
 
@@ -73,6 +76,18 @@ public class FragmentHome extends Fragment implements ChatAdapter.ViewHolder.Cli
         return data;
     }
 
+    public List<Chat> addChat(List<Chat> chatList, String name, int img, boolean online, String lastchat){
+        Chat chat = new Chat();
+        chat.setmTime("5:04pm");
+        chat.setName(name);
+        chat.setImage(img);
+        chat.setOnline(online);
+        chat.setLastChat(lastchat);
+        chatList.add(chat);
+
+        return chatList;
+    }
+
     @Override
     public void onItemClicked (int position) {
         startActivity(new Intent(getActivity(), Conversation.class));
@@ -106,8 +121,5 @@ public class FragmentHome extends Fragment implements ChatAdapter.ViewHolder.Cli
 
     }
 
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        menu.clear();
-        inflater.inflate(R.menu.menu_edit, menu);
-    }
+
 }

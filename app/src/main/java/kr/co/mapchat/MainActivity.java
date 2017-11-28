@@ -1,30 +1,25 @@
 package kr.co.mapchat;
 
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.MenuItemCompat;
 import android.view.Gravity;
-import android.view.MenuInflater;
-import android.view.SubMenu;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.ViewGroup;
 import android.widget.TextView;
 
 import net.daum.mf.map.api.MapPoint;
+
+import kr.co.mapchat.Fragments.FragmentContacts;
+import kr.co.mapchat.Fragments.FragmentHome;
+import kr.co.mapchat.Fragments.FragmentMap;
+import kr.co.mapchat.Fragments.FragmentMyInfo;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -40,12 +35,12 @@ public class MainActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setupToolbar(R.id.toolbar, "Messages");
+        setupToolbar(R.id.toolbar, "");
 
         FragmentTransaction ft;
-        FragmentHome fragmentHome = new FragmentHome();
+        FragmentMap fragmentMap = new FragmentMap();
         ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.frameLayout, fragmentHome).commit();
+        ft.add(R.id.frameLayout, fragmentMap).commit();
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -60,9 +55,9 @@ public class MainActivity extends BaseActivity
         navigationViewBottom.setNavigationItemSelectedListener(this);
 
 
-        chats =(TextView) MenuItemCompat.getActionView(navigationView.getMenu().
-                findItem(R.id.nav_chats));
-        initializeCountDrawer();
+//        chats =(TextView) MenuItemCompat.getActionView(navigationView.getMenu().
+//                findItem(R.id.nav_chats));
+//        initializeCountDrawer();
 
     }
 
@@ -110,20 +105,22 @@ public class MainActivity extends BaseActivity
         FragmentTransaction ft;
         int id = item.getItemId();
 
-        if (id == R.id.nav_contacts) {
-            FragmentContacts fragmentContacts = new FragmentContacts();
+        if (id == R.id.nav_all_question) {
+            FragmentMap fragmentMap = new FragmentMap();
             ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.frameLayout, fragmentContacts).addToBackStack(null).commit();
-        } else if (id == R.id.nav_chats) {
+            ft.replace(R.id.frameLayout, fragmentMap).addToBackStack(null).commit();
+        } else if (id == R.id.nav_my_question) {
             FragmentHome fragmentHome = new FragmentHome();
             ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.frameLayout, fragmentHome).commit();
-        } else if (id == R.id.nav_map) {
-            FragmentMap fragmentMap = new FragmentMap();
+        } else if (id == R.id.nav_my_answer) {
+            FragmentContacts fragmentContacts = new FragmentContacts();
             ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.frameLayout, fragmentMap).commit();
-        } else if (id == R.id.nav_settings) {
-        } else if (id == R.id.nav_logout) {
+            ft.replace(R.id.frameLayout, fragmentContacts).commit();
+        } else if (id == R.id.nav_bookmark) {
+        } else if (id == R.id.nav_rank) {
+        } else if (id == R.id.nav_manage){
+        } else if (id == R.id.nav_logout){
         }
 
         drawer.closeDrawer(GravityCompat.START);
@@ -136,6 +133,11 @@ public class MainActivity extends BaseActivity
 
     public boolean onHeaderItemSelected(View view) {
         // Handle navigation view item clicks here.
+
+        FragmentTransaction ft;
+        FragmentMyInfo fragmentMyInfo = new FragmentMyInfo();
+        ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.frameLayout, fragmentMyInfo).commit();
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);

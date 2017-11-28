@@ -41,26 +41,27 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.Trans"/>
+            android:theme="@style/AppTheme.Trans" />
         <activity
             android:name=".Conversation"
-            android:theme="@style/AppTheme.Trans"/>
+            android:theme="@style/AppTheme.Trans" />
         <activity
             android:name=".WriteActivity"
-            android:theme="@style/AppTheme.Trans"/>
+            android:theme="@android:style/Theme.Holo.Light.Dialog" />
 
         <service android:name=".util.FireBase.MyFirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-
         <service android:name=".util.FireBase.MyFirebaseInstanceIDService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT"/>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
         </service>
 
+        <activity android:name=".Fragments.FragmentMyInfo" />
+        <activity android:name=".Fragments.FragmentBookmark"></activity>
     </application>
 
 </manifest>

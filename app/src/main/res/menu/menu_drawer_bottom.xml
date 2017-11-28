@@ -2,14 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="none">
         <item
-            android:id="@+id/nav_settings"
-            android:icon="@drawable/ic_action_settings"
-            android:title="Settings" />
+            android:id="@+id/nav_manage"
+            android:icon="@drawable/ic_settings_black_48dp"
+            android:title="환경설정" />
         <item
             android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_action_logout"
-            android:title="Logout" />
+            android:icon="@drawable/ic_keyboard_return_black_48dp"
+            android:title="로그아웃" />
     </group>
 </menu>
