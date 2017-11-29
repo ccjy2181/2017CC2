@@ -43,7 +43,7 @@
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.Trans" />
         <activity
-            android:name=".Conversation"
+            android:name=".MyQuestion"
             android:theme="@style/AppTheme.Trans" />
         <activity
             android:name=".WriteActivity"
@@ -61,7 +61,9 @@
         </service>
 
         <activity android:name=".Fragments.FragmentMyInfo" />
-        <activity android:name=".Fragments.FragmentBookmark"></activity>
+        <activity android:name=".Fragments.FragmentBookmark" />
+        <activity android:name=".MyAnswer" />
+        <activity android:name=".Fragments.FragmentMyAnswer"></activity>
     </application>
 
 </manifest>

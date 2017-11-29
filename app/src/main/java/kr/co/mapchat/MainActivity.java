@@ -21,6 +21,7 @@ import android.widget.TextView;
 import net.daum.mf.map.api.MapPoint;
 
 import kr.co.mapchat.Fragments.FragmentContacts;
+import kr.co.mapchat.Fragments.FragmentMyAnswer;
 import kr.co.mapchat.Fragments.FragmentMyQuestion;
 import kr.co.mapchat.Fragments.FragmentMap;
 import kr.co.mapchat.Fragments.FragmentMyInfo;
@@ -148,11 +149,14 @@ public class MainActivity extends BaseActivity
             ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.frameLayout, fragmentMyQuestion).commit();
         } else if (id == R.id.nav_my_answer) {
+            FragmentMyAnswer fragmentMyAnswer = new FragmentMyAnswer();
+            ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.frameLayout, fragmentMyAnswer).commit();
+        } else if (id == R.id.nav_bookmark) {
+        } else if (id == R.id.nav_rank) {
             FragmentContacts fragmentContacts = new FragmentContacts();
             ft = getSupportFragmentManager().beginTransaction();
             ft.replace(R.id.frameLayout, fragmentContacts).commit();
-        } else if (id == R.id.nav_bookmark) {
-        } else if (id == R.id.nav_rank) {
         } else if (id == R.id.nav_manage){
         } else if (id == R.id.nav_exit){
             super.onBackPressed();

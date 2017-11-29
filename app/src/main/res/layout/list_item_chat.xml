@@ -25,13 +25,14 @@
             android:layout_height="match_parent"
             android:src="@drawable/userpic"/>
         <TextView
+            android:id="@+id/text_count"
             android:layout_width="28dp"
             android:layout_height="28dp"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
             android:layout_marginBottom="-2dp"
             android:gravity="center"
-            android:text="3"
+            android:text="2"
             android:textSize="@dimen/h4"
             android:textColor="@color/colorAccent"
             android:textAppearance="@style/Light"

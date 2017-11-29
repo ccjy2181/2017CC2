@@ -1,10 +1,11 @@
 package kr.co.mapchat.Fragments;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -13,22 +14,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import kr.co.mapchat.MyQuestion;
-import kr.co.mapchat.MainActivity;
-import kr.co.mapchat.R;
-import kr.co.mapchat.recyclerview.Chat;
-import kr.co.mapchat.recyclerview.ChatAdapter;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**
- * Created by Dytstudio.
- */
+import kr.co.mapchat.MainActivity;
+import kr.co.mapchat.MyAnswer;
+import kr.co.mapchat.MyQuestion;
+import kr.co.mapchat.R;
+import kr.co.mapchat.recyclerview.Chat;
+import kr.co.mapchat.recyclerview.ChatAdapter;
 
-public class FragmentMyQuestion extends Fragment implements ChatAdapter.ViewHolder.ClickListener{
+public class FragmentMyAnswer extends Fragment implements ChatAdapter.ViewHolder.ClickListener{
     private RecyclerView mRecyclerView;
     private ChatAdapter mAdapter;
     private TextView tv_selection;
@@ -37,7 +35,7 @@ public class FragmentMyQuestion extends Fragment implements ChatAdapter.ViewHold
     SimpleDateFormat current_date = new SimpleDateFormat("yyyy-MM-dd");
     SimpleDateFormat current_minute = new SimpleDateFormat("hh:mm");
 
-    public FragmentMyQuestion(){
+    public FragmentMyAnswer(){
         setHasOptionsMenu(true);
     }
     public void onCreate(Bundle a){
@@ -46,10 +44,10 @@ public class FragmentMyQuestion extends Fragment implements ChatAdapter.ViewHold
     }
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_my_question, null, false);
+        View view = inflater.inflate(R.layout.fragment_my_answer, null, false);
 
         getActivity().supportInvalidateOptionsMenu();
-        ((MainActivity)getActivity()).changeTitle(R.id.toolbar, "내 질문");
+        ((MainActivity)getActivity()).changeTitle(R.id.toolbar, "내 답변");
 
         tv_selection = (TextView) view.findViewById(R.id.tv_selection);
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
@@ -65,10 +63,10 @@ public class FragmentMyQuestion extends Fragment implements ChatAdapter.ViewHold
 
         // 초기 셋팅 + 파일 추가시 갱신해야함
 
-        String name[]= {"컴공 화석" };
-        @DrawableRes int img[]= {R.drawable.ryan };
-        boolean online[] = {true };
-        String lastchat[]= {"학관 식당 줄 많이 긴가요??"};
+        String name[]= {"Laura Owens", "Angela Price", "Donald Turner", "Kelly", "Julia Harris", "Laura Owens", "Angela Price", "Donald Turner", "Kelly", "Julia Harris" };
+        @DrawableRes int img[]= {R.drawable.userpic , R.drawable.user1, R.drawable.user2, R.drawable.user3, R.drawable.user4 , R.drawable.userpic , R.drawable.user1, R.drawable.user2, R.drawable.user3, R.drawable.user4 };
+        boolean online[] = {true, false, true, false, true, true, true, false, false, true};
+        String lastchat[]= {"Hi Laura Owens", "Hi there how are you", "Can we meet?", "Ow this awesome", "How are you?", "Ow this awesome", "How are you?", "Ow this awesome", "How are you?", "How are you?" };
 
         for (int i = 0; i<10; i++){
 
@@ -98,7 +96,7 @@ public class FragmentMyQuestion extends Fragment implements ChatAdapter.ViewHold
 
     @Override
     public void onItemClicked (int position) {
-        startActivity(new Intent(getActivity(), MyQuestion.class));
+        startActivity(new Intent(getActivity(), MyAnswer.class));
     }
 
     @Override
@@ -131,3 +129,4 @@ public class FragmentMyQuestion extends Fragment implements ChatAdapter.ViewHold
 
 
 }
+

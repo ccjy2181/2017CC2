@@ -40,12 +40,12 @@ public class MyFirebaseConnector {
 
                 MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(messageDTO.getLocation_latitude(), messageDTO.getLocation_longitude());
 
-                item.setItemName("Default Marker");
                 item.setTag(0);
                 // 좌표값 지정
                 item.setMapPoint(mapPoint);
                 item.setMarkerType(MapPOIItem.MarkerType.BluePin);
                 item.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
+                item.setItemName("학관 식당 질문!");
 
                 map.addPOIItem(item);
             }

@@ -14,7 +14,7 @@
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/user1"
+            android:src="@drawable/ryan"
             android:layout_marginRight="@dimen/space10"/>
         <TextView
             android:id="@+id/tv_chat_text"
@@ -23,7 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/space10"
-            android:text="Hi, joe how are you, do you like to join our party in next week because you don't like party?"
+            android:text="학관에 사람 많이 있나요???"
             android:textColor="@color/colorTextBlack"
             android:textSize="@dimen/h3"
             android:textAppearance="@style/Light"
@@ -35,7 +35,7 @@
             android:layout_height="wrap_content"
             android:drawablePadding="@dimen/space5"
             android:drawableLeft="@drawable/ic_clock"
-            android:text="5:04pm"
+            android:text="2017-11-29 05:04"
             android:textColor="@color/colorTextInfo"
             android:textSize="@dimen/h4"
             android:textAppearance="@style/ExtraLight"

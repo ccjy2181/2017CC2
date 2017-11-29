@@ -5,34 +5,30 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import kr.co.mapchat.recyclerview.Chat;
-import kr.co.mapchat.recylcerchat.ChatData;
-import kr.co.mapchat.recylcerchat.ConversationRecyclerView;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import kr.co.mapchat.R;
+import kr.co.mapchat.recylcerchat.ChatData;
+import kr.co.mapchat.recylcerchat.ConversationRecyclerView;
 
-
-public class Conversation extends BaseActivity {
+public class MyAnswer extends BaseActivity {
 
     private RecyclerView mRecyclerView;
     private ConversationRecyclerView mAdapter;
     private EditText text;
     private Button send;
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_conversation);
+        setContentView(R.layout.activity_my_answer);
 
-        setupToolbarWithUpNav(R.id.toolbar, "Julia Harriss", R.drawable.ic_action_back);
+        setupToolbarWithUpNav(R.id.toolbar, name, R.drawable.ic_action_back);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
@@ -75,6 +71,11 @@ public class Conversation extends BaseActivity {
                 }
             }
         });
+    }
+
+    public void setName(String get_name){
+        //채팅방 유저 이름 정해주기
+        name = get_name;
     }
 
     public List<ChatData> setData(){
