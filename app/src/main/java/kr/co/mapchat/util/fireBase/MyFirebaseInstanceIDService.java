@@ -8,7 +8,7 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 
 import java.util.Date;
 
-import kr.co.mapchat.DTO.UserDTO;
+import kr.co.mapchat.dto.UserDTO;
 
 public class MyFirebaseInstanceIDService extends FirebaseInstanceIdService {
     @Override

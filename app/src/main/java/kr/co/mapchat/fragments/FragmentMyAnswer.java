@@ -1,4 +1,4 @@
-package kr.co.mapchat.Fragments;
+package kr.co.mapchat.fragments;
 
 import android.content.Intent;
 import android.support.annotation.Nullable;
@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import kr.co.mapchat.Adapter.MessageADT;
-import kr.co.mapchat.DTO.MessageDTO;
+import kr.co.mapchat.adapter.MessageADT;
+import kr.co.mapchat.dto.MessageDTO;
 import kr.co.mapchat.MainActivity;
 import kr.co.mapchat.MyAnswer;
 import kr.co.mapchat.R;

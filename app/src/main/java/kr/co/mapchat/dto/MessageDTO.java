@@ -1,4 +1,4 @@
-package kr.co.mapchat.DTO;
+package kr.co.mapchat.dto;
 
 import android.graphics.Bitmap;
 

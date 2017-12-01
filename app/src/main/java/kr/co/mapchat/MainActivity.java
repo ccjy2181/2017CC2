@@ -2,7 +2,6 @@ package kr.co.mapchat;
 
 import android.content.DialogInterface;
 import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -20,11 +19,11 @@ import android.widget.TextView;
 
 import net.daum.mf.map.api.MapPoint;
 
-import kr.co.mapchat.Fragments.FragmentContacts;
-import kr.co.mapchat.Fragments.FragmentMyAnswer;
-import kr.co.mapchat.Fragments.FragmentMyQuestion;
-import kr.co.mapchat.Fragments.FragmentMap;
-import kr.co.mapchat.Fragments.FragmentMyInfo;
+import kr.co.mapchat.fragments.FragmentContacts;
+import kr.co.mapchat.fragments.FragmentMyAnswer;
+import kr.co.mapchat.fragments.FragmentMyQuestion;
+import kr.co.mapchat.fragments.FragmentMap;
+import kr.co.mapchat.fragments.FragmentMyInfo;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {

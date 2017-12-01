@@ -1,4 +1,4 @@
-package kr.co.mapchat.Fragments;
+package kr.co.mapchat.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;

@@ -18,7 +18,7 @@ import android.widget.TextView;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
-import kr.co.mapchat.DTO.MessageDTO;
+import kr.co.mapchat.dto.MessageDTO;
 import kr.co.mapchat.util.fireBase.MyFirebaseConnector;
 
 import static net.daum.mf.map.api.MapPoint.mapPointWithGeoCoord;

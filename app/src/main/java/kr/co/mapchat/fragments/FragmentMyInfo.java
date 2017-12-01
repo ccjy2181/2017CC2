@@ -1,19 +1,14 @@
-package kr.co.mapchat.Fragments;
+package kr.co.mapchat.fragments;
 
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import kr.co.mapchat.MainActivity;
 import kr.co.mapchat.R;
-import kr.co.mapchat.recyclerview.ChatAdapter;
 
 public class FragmentMyInfo extends Fragment {
     View view;

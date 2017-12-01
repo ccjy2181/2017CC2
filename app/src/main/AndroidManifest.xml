@@ -60,10 +60,10 @@
             </intent-filter>
         </service>
 
-        <activity android:name=".Fragments.FragmentMyInfo" />
-        <activity android:name=".Fragments.FragmentBookmark" />
+        <activity android:name=".fragments.FragmentMyInfo" />
+        <activity android:name=".fragments.FragmentBookmark" />
         <activity android:name=".MyAnswer" />
-        <activity android:name=".Fragments.FragmentMyAnswer"></activity>
+        <activity android:name=".fragments.FragmentMyAnswer"></activity>
     </application>
 
 </manifest>

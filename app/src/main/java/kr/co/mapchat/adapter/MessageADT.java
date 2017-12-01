@@ -1,4 +1,4 @@
-package kr.co.mapchat.Adapter;
+package kr.co.mapchat.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import kr.co.mapchat.DTO.MessageDTO;
+import kr.co.mapchat.dto.MessageDTO;
 import kr.co.mapchat.R;
 import kr.co.mapchat.recyclerview.SelectableAdapter;
 
