@@ -9,5 +9,7 @@ public class MessageDTO {
         private String contents;
         private double location_latitude;
         private double location_longitude;
+        private double wcong_x;
+        private double wcong_y;
         private int range;
 }

@@ -35,7 +35,7 @@ public class FragmentMyQuestion extends Fragment implements ChatAdapter.ViewHold
     long mNow;
     Date mDate;
     SimpleDateFormat current_date = new SimpleDateFormat("yyyy-MM-dd");
-    SimpleDateFormat current_minute = new SimpleDateFormat("hh:mm");
+    SimpleDateFormat current_minute = new SimpleDateFormat("HH:mm");
 
     public FragmentMyQuestion(){
         setHasOptionsMenu(true);
@@ -72,9 +72,7 @@ public class FragmentMyQuestion extends Fragment implements ChatAdapter.ViewHold
 
         for (int i = 0; i<1; i++){
 
-
             Chat chat = addChat(name[i], img[i], online[i], lastchat[i]);
-
 
             data.add(chat);
         }

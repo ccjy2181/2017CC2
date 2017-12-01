@@ -5,7 +5,7 @@ package kr.co.mapchat.recylcerchat;
  */
 
 public class ChatData {
-    String type, text, time;
+    String type, text, time, date;
 
     public String getText() {
         return text;
@@ -29,5 +29,13 @@ public class ChatData {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 }

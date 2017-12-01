@@ -33,7 +33,7 @@ public class FragmentMyAnswer extends Fragment implements ChatAdapter.ViewHolder
     long mNow;
     Date mDate;
     SimpleDateFormat current_date = new SimpleDateFormat("yyyy-MM-dd");
-    SimpleDateFormat current_minute = new SimpleDateFormat("hh:mm");
+    SimpleDateFormat current_minute = new SimpleDateFormat("HH:mm");
 
     public FragmentMyAnswer(){
         setHasOptionsMenu(true);

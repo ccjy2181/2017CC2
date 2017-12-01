@@ -12,12 +12,13 @@ import kr.co.mapchat.R;
 
 public class HolderYou extends RecyclerView.ViewHolder {
 
-    private TextView time, chatText;
+    private TextView time, chatText, date;
 
     public HolderYou(View v) {
         super(v);
         time = (TextView) v.findViewById(R.id.tv_time);
         chatText = (TextView) v.findViewById(R.id.tv_chat_text);
+        date = (TextView) v.findViewById(R.id.tv_date);
     }
 
     public TextView getTime() {
@@ -34,5 +35,13 @@ public class HolderYou extends RecyclerView.ViewHolder {
 
     public void setChatText(TextView chatText) {
         this.chatText = chatText;
+    }
+
+    public TextView getDate() {
+        return date;
+    }
+
+    public void setDate(TextView date) {
+        this.date = date;
     }
 }

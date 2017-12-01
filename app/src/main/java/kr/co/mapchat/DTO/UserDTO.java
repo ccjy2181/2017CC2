@@ -8,4 +8,5 @@ import lombok.Data;
 public class UserDTO {
     private String token;
     private Date regdate;
+
 }

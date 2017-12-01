@@ -126,6 +126,9 @@ public class WriteActivity extends Activity implements MapView.MapViewEventListe
         messageDTO.setRange(getArea());
         messageDTO.setLocation_latitude(latitude);
         messageDTO.setLocation_longitude(longitude);
+        MapPoint.PlainCoordinate wcongMap = mapPoint.getMapPointWCONGCoord();
+        messageDTO.setWcong_x(wcongMap.x);
+        messageDTO.setWcong_y(wcongMap.y);
 
         myFirebaseConnector = new MyFirebaseConnector("message");
         myFirebaseConnector.insertData(messageDTO);
