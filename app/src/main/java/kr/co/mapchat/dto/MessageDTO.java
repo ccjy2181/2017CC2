@@ -13,7 +13,5 @@ public class MessageDTO {
         private double location_longitude;
         private int range;
         private String image_string;
-
-        //add data
-        private Bitmap image;
+        private int answer_cnt;
 }

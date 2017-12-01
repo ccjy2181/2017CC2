@@ -2,7 +2,6 @@ package kr.co.mapchat.fragments;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,15 +18,8 @@ import kr.co.mapchat.MainActivity;
 import kr.co.mapchat.R;
 import kr.co.mapchat.adapter.MessageADT;
 import kr.co.mapchat.dto.MessageDTO;
-import kr.co.mapchat.recyclerview.Chat;
-import kr.co.mapchat.recyclerview.ChatAdapter;
 import kr.co.mapchat.util.fireBase.MyFirebaseConnector;
-import kr.co.mapchat.util.system.ImageManager;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -75,75 +67,6 @@ public class FragmentMyQuestion extends Fragment implements MessageADT.ViewHolde
 
         return view;
     }
-//    public List<Chat> setData(){
-//        List<Chat> data = new ArrayList<>();
-//
-//        // 초기 셋팅 + 파일 추가시 갱신해야함
-//
-//        String name[]= {"컴공 화석" };
-//        URL img = null;
-//        try {
-//            img = new URL("http://map2.daum.net/map/imageservice?IW=300&IH=300&MX=495112&MY=1129685&SCALE=2.5&CX=495113&CY=1129686&service=open");
-//        } catch (MalformedURLException e) {
-//            e.printStackTrace();
-//        }
-//        boolean online[] = {true };
-//        String lastchat[]= {"학관 식당 줄 많이 긴가요??"};
-//
-//        for (int i = 0; i<1; i++){
-//
-//            Chat chat = addChat(name[i], img, online[i], lastchat[i]);
-//
-//            data.add(chat);
-//        }
-//        return data;
-//    }
-
-//    public Chat addChat(String name, URL img, boolean online, String lastchat){
-//        url = img;
-//        Chat chat = new Chat();
-//        Thread mThread = new Thread() {
-//            @Override
-//            public void run() {
-//
-//                try {
-//                    //  아래 코드는 웹에서 이미지를 가져온 뒤
-//                    //  이미지 뷰에 지정할 Bitmap을 생성하는 과정
-//
-//                    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
-//                    conn.setDoInput(true);
-//                    conn.connect();
-//
-//                    InputStream is = conn.getInputStream();
-//                    bitmap = BitmapFactory.decodeStream(is);
-//
-//                } catch(IOException ex) {
-//
-//                }
-//            }
-//        };
-//
-//        mThread.start();
-//
-//        try {
-//            mThread.join();
-//
-//            mNow = System.currentTimeMillis();
-//            mDate = new Date(mNow);
-//            String getDate = current_date.format(mDate);
-//            String getMinute = current_minute.format(mDate);
-//            chat.setmTime(getDate + " " + getMinute);
-//            chat.setName(name);
-//            chat.setImage(bitmap);
-//            chat.setOnline(online);
-//            chat.setLastChat(lastchat);
-//
-//            return chat;
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        return chat;
-//    }
 
     @Override
     public void onItemClicked (int position) {

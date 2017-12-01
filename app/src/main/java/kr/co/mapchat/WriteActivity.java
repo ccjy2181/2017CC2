@@ -126,6 +126,7 @@ public class WriteActivity extends Activity implements MapView.MapViewEventListe
         messageDTO.setRange(getArea());
         messageDTO.setLocation_latitude(latitude);
         messageDTO.setLocation_longitude(longitude);
+        messageDTO.setAnswer_cnt(0);
         MapPoint.PlainCoordinate wcongMap = mapPoint.getMapPointWCONGCoord();
         ImageManager imageManager = new ImageManager();
         messageDTO.setImage_string(imageManager.encodingImageData(Property.MAP_IMAGE_URL + "&MX=" + (int)wcongMap.x + "&MY=" + (int)wcongMap.y + "&CX=" + (int)wcongMap.x + "&CY=" + (int)wcongMap.y));

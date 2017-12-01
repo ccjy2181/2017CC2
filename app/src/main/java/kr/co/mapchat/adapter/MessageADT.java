@@ -47,6 +47,7 @@ public class MessageADT extends SelectableAdapter<MessageADT.ViewHolder> {
         ImageManager imageManager = new ImageManager();
 
         viewHolder.tvName.setText(mArrayList.get(position).getTitle());
+        viewHolder.tvText_count.setText(mArrayList.get(position).getAnswer_cnt()+"");
         if (isSelected(position)) {
             viewHolder.checked.setChecked(true);
             viewHolder.checked.setVisibility(View.VISIBLE);
@@ -75,6 +76,7 @@ public class MessageADT extends SelectableAdapter<MessageADT.ViewHolder> {
         public TextView tvTime;
         public TextView tvLastChat;
         public ImageView mapImage;
+        public TextView tvText_count;
         public boolean online = false;
         private final View onlineView;
         public CheckBox checked;
@@ -90,6 +92,7 @@ public class MessageADT extends SelectableAdapter<MessageADT.ViewHolder> {
             tvName = (TextView) itemLayoutView.findViewById(R.id.tv_user_name);
             //selectedOverlay = (View) itemView.findViewById(R.id.selected_overlay);
             tvTime = (TextView) itemLayoutView.findViewById(R.id.tv_time);
+            tvText_count = (TextView) itemLayoutView.findViewById(R.id.text_count);
             tvLastChat = (TextView) itemLayoutView.findViewById(R.id.tv_last_chat);
             mapImage = (ImageView) itemLayoutView.findViewById(R.id.map_image);
             onlineView = (View) itemLayoutView.findViewById(R.id.online_indicator);
