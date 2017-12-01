@@ -15,6 +15,7 @@ import java.util.List;
 import kr.co.mapchat.dto.MessageDTO;
 import kr.co.mapchat.R;
 import kr.co.mapchat.recyclerview.SelectableAdapter;
+import kr.co.mapchat.util.system.ImageManager;
 
 public class MessageADT extends SelectableAdapter<MessageADT.ViewHolder> {
     private List<MessageDTO> mArrayList;
@@ -43,6 +44,8 @@ public class MessageADT extends SelectableAdapter<MessageADT.ViewHolder> {
     @Override
     public void onBindViewHolder(MessageADT.ViewHolder viewHolder, int position) {
 
+        ImageManager imageManager = new ImageManager();
+
         viewHolder.tvName.setText(mArrayList.get(position).getTitle());
         if (isSelected(position)) {
             viewHolder.checked.setChecked(true);
@@ -52,8 +55,7 @@ public class MessageADT extends SelectableAdapter<MessageADT.ViewHolder> {
             viewHolder.checked.setVisibility(View.GONE);
         }
         viewHolder.tvTime.setText(mArrayList.get(position).getTitle());
-//        viewHolder.userPhoto.setImageResource(mArrayList.get(position).getImage());
-        viewHolder.mapImage.setImageBitmap(mArrayList.get(position).getImage());
+        viewHolder.mapImage.setImageBitmap(imageManager.decodingImageData(mArrayList.get(position).getImage_string()));
 //        if (mArrayList.get(position).getOnline()){
 //            viewHolder.onlineView.setVisibility(View.VISIBLE);
 //        }else

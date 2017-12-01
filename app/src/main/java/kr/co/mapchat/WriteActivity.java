@@ -20,6 +20,8 @@ import net.daum.mf.map.api.MapView;
 
 import kr.co.mapchat.dto.MessageDTO;
 import kr.co.mapchat.util.fireBase.MyFirebaseConnector;
+import kr.co.mapchat.util.system.ImageManager;
+import kr.co.mapchat.util.system.Property;
 
 import static net.daum.mf.map.api.MapPoint.mapPointWithGeoCoord;
 
@@ -125,8 +127,9 @@ public class WriteActivity extends Activity implements MapView.MapViewEventListe
         messageDTO.setLocation_latitude(latitude);
         messageDTO.setLocation_longitude(longitude);
         MapPoint.PlainCoordinate wcongMap = mapPoint.getMapPointWCONGCoord();
-        messageDTO.setWcong_x(wcongMap.x);
-        messageDTO.setWcong_y(wcongMap.y);
+        ImageManager imageManager = new ImageManager();
+        messageDTO.setImage_string(imageManager.encodingImageData(Property.MAP_IMAGE_URL + "&MX=" + (int)wcongMap.x + "&MY=" + (int)wcongMap.y + "&CX=" + (int)wcongMap.x + "&CY=" + (int)wcongMap.y));
+        System.out.println();
 
         myFirebaseConnector = new MyFirebaseConnector("message");
         myFirebaseConnector.insertData(messageDTO);
