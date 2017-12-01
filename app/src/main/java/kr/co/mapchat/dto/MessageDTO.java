@@ -2,6 +2,8 @@ package kr.co.mapchat.dto;
 
 import android.graphics.Bitmap;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -14,4 +16,8 @@ public class MessageDTO {
         private int range;
         private String image_string;
         private int answer_cnt;
+        private Date regdate;
+
+        //add data
+        private String key;
 }

@@ -18,6 +18,8 @@ import android.widget.TextView;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
+import java.util.Date;
+
 import kr.co.mapchat.dto.MessageDTO;
 import kr.co.mapchat.util.fireBase.MyFirebaseConnector;
 import kr.co.mapchat.util.system.ImageManager;
@@ -127,6 +129,7 @@ public class WriteActivity extends Activity implements MapView.MapViewEventListe
         messageDTO.setLocation_latitude(latitude);
         messageDTO.setLocation_longitude(longitude);
         messageDTO.setAnswer_cnt(0);
+        messageDTO.setRegdate(new Date());
         MapPoint.PlainCoordinate wcongMap = mapPoint.getMapPointWCONGCoord();
         ImageManager imageManager = new ImageManager();
         messageDTO.setImage_string(imageManager.encodingImageData(Property.MAP_IMAGE_URL + "&MX=" + (int)wcongMap.x + "&MY=" + (int)wcongMap.y + "&CX=" + (int)wcongMap.x + "&CY=" + (int)wcongMap.y));

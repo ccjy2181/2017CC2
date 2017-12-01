@@ -49,6 +49,7 @@ public class MyFirebaseConnector {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 MessageDTO messageDTO = dataSnapshot.getValue(MessageDTO.class);  // chatData를 가져오고
+                messageDTO.setKey(dataSnapshot.getKey());
                 MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(messageDTO.getLocation_latitude(), messageDTO.getLocation_longitude());
 
                 item.setTag(0);
@@ -82,21 +83,11 @@ public class MyFirebaseConnector {
         databaseReference.child(table).orderByKey().getRef().orderByChild("user").equalTo(token).addChildEventListener(new ChildEventListener() {  // message는 child의 이벤트를 수신합니다.
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                MessageDTO messageDTO = dataSnapshot.getValue(MessageDTO.class);  // chatData를 가져오고
-//                MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(messageDTO.getLocation_latitude(), messageDTO.getLocation_longitude());
-//
-//                item.setTag(0);
-//                // 좌표값 지정
-//                item.setMapPoint(mapPoint);
-//                item.setMarkerType(MapPOIItem.MarkerType.BluePin);
-//                item.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
-//                item.setItemName("학관 식당 질문!");
-//
-//                map.addPOIItem(item);
+                MessageDTO messageDTO = dataSnapshot.getValue(MessageDTO.class);  // chatData를 가져오고\
+                messageDTO.setKey(dataSnapshot.getKey());
 
                 item.add(0, messageDTO);
                 itemAdapter.notifyDataSetChanged();
-                System.out.println(messageDTO);
             }
 
             @Override

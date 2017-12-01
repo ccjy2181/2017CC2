@@ -13,17 +13,17 @@ import android.widget.TextView;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-import kr.co.mapchat.dto.MessageDTO;
 import kr.co.mapchat.R;
+import kr.co.mapchat.dto.MessageDTO;
 import kr.co.mapchat.recyclerview.SelectableAdapter;
 import kr.co.mapchat.util.system.ImageManager;
 
-public class MessageADT extends SelectableAdapter<MessageADT.ViewHolder> {
+public class AnswerADT extends SelectableAdapter<AnswerADT.ViewHolder> {
     private List<MessageDTO> mArrayList;
     private Context mContext;
-    private MessageADT.ViewHolder.ClickListener clickListener;
+    private AnswerADT.ViewHolder.ClickListener clickListener;
 
-    public MessageADT (Context context, List<MessageDTO> arrayList,MessageADT.ViewHolder.ClickListener clickListener) {
+    public AnswerADT(Context context, List<MessageDTO> arrayList, AnswerADT.ViewHolder.ClickListener clickListener) {
         this.mArrayList = arrayList;
         this.mContext = context;
         this.clickListener = clickListener;
@@ -31,19 +31,19 @@ public class MessageADT extends SelectableAdapter<MessageADT.ViewHolder> {
 
     // Create new views
     @Override
-    public MessageADT.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                     int viewType) {
+    public AnswerADT.ViewHolder onCreateViewHolder(ViewGroup parent,
+                                                   int viewType) {
 
         View itemLayoutView = LayoutInflater.from(parent.getContext()).inflate(
                 R.layout.list_item_chat, null);
 
-        MessageADT.ViewHolder viewHolder = new MessageADT.ViewHolder(itemLayoutView,clickListener);
+        AnswerADT.ViewHolder viewHolder = new AnswerADT.ViewHolder(itemLayoutView,clickListener);
 
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(MessageADT.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(AnswerADT.ViewHolder viewHolder, int position) {
 
         ImageManager imageManager = new ImageManager();
 
@@ -82,11 +82,11 @@ public class MessageADT extends SelectableAdapter<MessageADT.ViewHolder> {
         public boolean online = false;
         private final View onlineView;
         public CheckBox checked;
-        private MessageADT.ViewHolder.ClickListener listener;
+        private AnswerADT.ViewHolder.ClickListener listener;
         //private final View selectedOverlay;
 
 
-        public ViewHolder(View itemLayoutView,MessageADT.ViewHolder.ClickListener listener) {
+        public ViewHolder(View itemLayoutView,AnswerADT.ViewHolder.ClickListener listener) {
             super(itemLayoutView);
 
             this.listener = listener;
