@@ -8,12 +8,9 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
-
-import com.github.clans.fab.FloatingActionButton;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
@@ -23,9 +20,7 @@ import kr.co.mapchat.CodeConfig;
 import kr.co.mapchat.MainActivity;
 import kr.co.mapchat.R;
 import kr.co.mapchat.WriteActivity;
-import kr.co.mapchat.util.FireBase.MyFirebaseConnector;
-
-import static android.view.KeyEvent.ACTION_UP;
+import kr.co.mapchat.util.fireBase.MyFirebaseConnector;
 
 
 /**

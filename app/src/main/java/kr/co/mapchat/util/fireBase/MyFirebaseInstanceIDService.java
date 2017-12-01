@@ -1,4 +1,4 @@
-package kr.co.mapchat.util.FireBase;
+package kr.co.mapchat.util.fireBase;
 
 import android.content.SharedPreferences;
 

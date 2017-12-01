@@ -1,11 +1,8 @@
 package kr.co.mapchat.Fragments;
 
 import android.content.Intent;
-import android.os.Message;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,8 +11,6 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
-import net.daum.mf.map.api.MapPOIItem;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -26,11 +21,8 @@ import kr.co.mapchat.Adapter.MessageADT;
 import kr.co.mapchat.DTO.MessageDTO;
 import kr.co.mapchat.MainActivity;
 import kr.co.mapchat.MyAnswer;
-import kr.co.mapchat.MyQuestion;
 import kr.co.mapchat.R;
-import kr.co.mapchat.recyclerview.Chat;
-import kr.co.mapchat.recyclerview.ChatAdapter;
-import kr.co.mapchat.util.FireBase.MyFirebaseConnector;
+import kr.co.mapchat.util.fireBase.MyFirebaseConnector;
 
 public class FragmentMyAnswer extends Fragment implements MessageADT.ViewHolder.ClickListener{
     private MyFirebaseConnector myFirebaseConnector;
@@ -70,7 +62,7 @@ public class FragmentMyAnswer extends Fragment implements MessageADT.ViewHolder.
 
         test.setTitle("test!!!");
 
-        myFirebaseConnector = new MyFirebaseConnector("message");
+        myFirebaseConnector = new MyFirebaseConnector("message", this.getContext());
         myFirebaseConnector.getMyMessage(data, mAdapter);
 
 //        data.add(test);

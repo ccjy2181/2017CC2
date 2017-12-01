@@ -3,9 +3,7 @@ package kr.co.mapchat;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.DragEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -21,7 +19,7 @@ import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
 import kr.co.mapchat.DTO.MessageDTO;
-import kr.co.mapchat.util.FireBase.MyFirebaseConnector;
+import kr.co.mapchat.util.fireBase.MyFirebaseConnector;
 
 import static net.daum.mf.map.api.MapPoint.mapPointWithGeoCoord;
 
