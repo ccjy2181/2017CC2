@@ -1,5 +1,7 @@
 package kr.co.mapchat.recyclerview;
 
+import android.graphics.Bitmap;
+
 /**
  * Created by Dytstudio.
  */
@@ -9,7 +11,7 @@ public class Chat {
     private String mName;
     private String mLastChat;
     private String mTime;
-    private int mImage;
+    private Bitmap mImage;
     private boolean online;
 
     public String getName() {
@@ -36,11 +38,11 @@ public class Chat {
         mTime = time;
     }
 
-    public int getImage() {
+    public Bitmap getImage() {
         return mImage;
     }
 
-    public void setImage(int image) {
+    public void setImage(Bitmap image) {
         mImage = image;
     }
 

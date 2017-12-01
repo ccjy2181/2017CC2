@@ -59,7 +59,7 @@ public class ChatAdapter extends SelectableAdapter<ChatAdapter.ViewHolder> {
             viewHolder.checked.setVisibility(View.GONE);
         }
         viewHolder.tvTime.setText(mArrayList.get(position).getTime());
-        viewHolder.userPhoto.setImageResource(mArrayList.get(position).getImage());
+        viewHolder.mapImage.setImageBitmap(mArrayList.get(position).getImage());
         if (mArrayList.get(position).getOnline()){
             viewHolder.onlineView.setVisibility(View.VISIBLE);
         }else
@@ -78,7 +78,7 @@ public class ChatAdapter extends SelectableAdapter<ChatAdapter.ViewHolder> {
         public TextView tvName;
         public TextView tvTime;
         public TextView tvLastChat;
-        public ImageView userPhoto;
+        public ImageView mapImage;
         public boolean online = false;
         private final View onlineView;
         public CheckBox checked;
@@ -95,7 +95,7 @@ public class ChatAdapter extends SelectableAdapter<ChatAdapter.ViewHolder> {
             //selectedOverlay = (View) itemView.findViewById(R.id.selected_overlay);
             tvTime = (TextView) itemLayoutView.findViewById(R.id.tv_time);
             tvLastChat = (TextView) itemLayoutView.findViewById(R.id.tv_last_chat);
-            userPhoto = (ImageView) itemLayoutView.findViewById(R.id.iv_user_photo);
+            mapImage = (ImageView) itemLayoutView.findViewById(R.id.map_image);
             onlineView = (View) itemLayoutView.findViewById(R.id.online_indicator);
             checked = (CheckBox) itemLayoutView.findViewById(R.id.chk_list);
 
