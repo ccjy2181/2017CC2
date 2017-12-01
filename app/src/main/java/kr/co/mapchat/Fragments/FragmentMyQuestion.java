@@ -70,7 +70,7 @@ public class FragmentMyQuestion extends Fragment implements ChatAdapter.ViewHold
         boolean online[] = {true };
         String lastchat[]= {"학관 식당 줄 많이 긴가요??"};
 
-        for (int i = 0; i<10; i++){
+        for (int i = 0; i<1; i++){
 
 
             Chat chat = addChat(name[i], img[i], online[i], lastchat[i]);
