@@ -55,6 +55,9 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_map, container, false);
 
+        mapView = new MapView(view.getContext());
+        mapView.setPOIItemEventListener(this);
+
         getActivity().supportInvalidateOptionsMenu();
         ((MainActivity)getActivity()).changeTitle(R.id.toolbar, "실시간 질문");
 
@@ -106,7 +109,7 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
     }
 
     public void initMapView(){
-        mapView = new MapView(view.getContext());
+        mapView.setPOIItemEventListener(this);
 
         mapViewContainer.addView(mapView, 0);
 
@@ -180,28 +183,12 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
 
     @Override
     public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
-        System.out.println("##################################");
-        MessageDTO messageDTO = (MessageDTO) mapPOIItem.getUserObject();
 
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("messageDTO", messageDTO);
-
-        Intent intent = new Intent(getContext(), ReplyActivity.class);
-        intent.putExtras(bundle);
-
-        startActivity(intent);
     }
 
     @Override
     public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem) {
-        MessageDTO messageDTO = (MessageDTO) mapPOIItem.getUserObject();
 
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("messageDTO", messageDTO);
-
-        Intent intent = new Intent(getContext(), ReplyActivity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
     }
 
     @Override
