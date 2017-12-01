@@ -1,6 +1,7 @@
 package kr.co.mapchat.fragments;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,15 +20,20 @@ import net.daum.mf.map.api.MapView;
 import kr.co.mapchat.CodeConfig;
 import kr.co.mapchat.MainActivity;
 import kr.co.mapchat.R;
+import kr.co.mapchat.ReplyActivity;
 import kr.co.mapchat.WriteActivity;
+import kr.co.mapchat.dto.MessageDTO;
 import kr.co.mapchat.util.fireBase.MyFirebaseConnector;
+
+import static android.content.Context.MODE_PRIVATE;
+import static net.daum.mf.map.api.MapPOIItem.CalloutBalloonButtonType.MainButton;
 
 
 /**
  * Created by Dytstudio.
  */
 
-public class FragmentMap extends Fragment implements MapView.MapViewEventListener{
+public class FragmentMap extends Fragment implements MapView.MapViewEventListener, MapView.POIItemEventListener{
     private MyFirebaseConnector myFirebaseConnector;
 
     CodeConfig codeConfig = new CodeConfig();
@@ -104,7 +110,8 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
 
         mapViewContainer.addView(mapView, 0);
 
-        MapPOIItem marker = new MapPOIItem();
+        final MapPOIItem marker = new MapPOIItem();
+
         myFirebaseConnector = new MyFirebaseConnector("message");
         myFirebaseConnector.getMarkerData(mapView, marker);
     }
@@ -168,6 +175,49 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
 
     @Override
     public void onMapViewMoveFinished(MapView mapView, MapPoint mapPoint) {
+
+    }
+
+    @Override
+    public void onPOIItemSelected(MapView mapView, MapPOIItem mapPOIItem) {
+        System.out.println("##################################");
+        MessageDTO messageDTO = (MessageDTO) mapPOIItem.getUserObject();
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("messageDTO", messageDTO);
+
+        Intent intent = new Intent(getContext(), ReplyActivity.class);
+        intent.putExtras(bundle);
+
+        startActivity(intent);
+    }
+
+    @Override
+    public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem) {
+        MessageDTO messageDTO = (MessageDTO) mapPOIItem.getUserObject();
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("messageDTO", messageDTO);
+
+        Intent intent = new Intent(getContext(), ReplyActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem, MapPOIItem.CalloutBalloonButtonType calloutBalloonButtonType) {
+        MessageDTO messageDTO = (MessageDTO) mapPOIItem.getUserObject();
+
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("messageDTO", messageDTO);
+
+        Intent intent = new Intent(getContext(), ReplyActivity.class);
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onDraggablePOIItemMoved(MapView mapView, MapPOIItem mapPOIItem, MapPoint mapPoint) {
 
     }
 }

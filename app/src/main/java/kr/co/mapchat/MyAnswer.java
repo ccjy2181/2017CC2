@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import kr.co.mapchat.recylcerchat.ChatData;
@@ -22,11 +24,18 @@ public class MyAnswer extends BaseActivity {
     private EditText text;
     private Button send;
     private String name;
+    long mNow;
+    SimpleDateFormat current_date = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat current_minute = new SimpleDateFormat("HH:mm");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_answer);
+
+        mNow = System.currentTimeMillis();
+        current_date.format(new Date(mNow));
+        current_minute.format(new Date(mNow));
 
         setupToolbarWithUpNav(R.id.toolbar, name, R.drawable.ic_action_back);
 
@@ -61,10 +70,13 @@ public class MyAnswer extends BaseActivity {
                 if (!text.getText().equals("")){
                     List<ChatData> data = new ArrayList<ChatData>();
                     ChatData item = new ChatData();
-                    item.setTime("6:00pm");
+                    item.setTime(current_date + " " + current_minute);
                     item.setType("2");
                     item.setText(text.getText().toString());
                     data.add(item);
+
+                    // Firebase에 답변 저장하는 코드 적어야함!
+
                     mAdapter.addItem(data);
                     mRecyclerView.smoothScrollToPosition(mRecyclerView.getAdapter().getItemCount() -1);
                     text.setText("");
@@ -81,9 +93,9 @@ public class MyAnswer extends BaseActivity {
     public List<ChatData> setData(){
         List<ChatData> data = new ArrayList<>();
 
-        String text[] = {"15 September","Hi, Julia! How are you?", "Hi, Joe, looks great! :) ", "I'm fine. Wanna go out somewhere?", "Yes! Coffe maybe?", "Great idea! You can come 9:00 pm? :)))", "Ok!", "Ow my good, this Kit is totally awesome", "Can you provide other kit?", "I don't have much time, :`("};
-        String time[] = {"", "5:30pm", "5:35pm", "5:36pm", "5:40pm", "5:41pm", "5:42pm", "5:40pm", "5:41pm", "5:42pm"};
-        String type[] = {"0", "2", "1", "1", "2", "1", "2", "2", "2", "1"};
+        String text[] = {"Test"};
+        String time[] = { current_date + "" + current_minute};
+        String type[] = {"1"};
 
         for (int i=0; i<text.length; i++){
             ChatData item = new ChatData();

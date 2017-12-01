@@ -2,12 +2,14 @@ package kr.co.mapchat.dto;
 
 import android.graphics.Bitmap;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import lombok.Data;
 
 @Data
-public class MessageDTO {
+@SuppressWarnings("serial")
+public class MessageDTO implements Serializable {
         private String user;
         private String title;
         private String contents;

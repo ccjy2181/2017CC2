@@ -57,7 +57,8 @@ public class MyFirebaseConnector {
                 item.setMapPoint(mapPoint);
                 item.setMarkerType(MapPOIItem.MarkerType.BluePin);
                 item.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
-                item.setItemName("학관 식당 질문!");
+                item.setItemName(messageDTO.getTitle());
+                item.setUserObject(messageDTO);
 
                 map.addPOIItem(item);
             }
@@ -102,5 +103,13 @@ public class MyFirebaseConnector {
             @Override
             public void onCancelled(DatabaseError databaseError) { }
         });
+    }
+
+    public String getQuestionTitle(DataSnapshot dataSnapshot){
+        MessageDTO messageDTO = dataSnapshot.getValue(MessageDTO.class);  // chatData를 가져오고
+        messageDTO.setKey(dataSnapshot.getKey());
+
+        String title = messageDTO.getTitle();
+        return title;
     }
 }
