@@ -33,7 +33,7 @@ import static android.view.KeyEvent.ACTION_UP;
  */
 
 public class FragmentMap extends Fragment implements MapView.MapViewEventListener{
-    MyFirebaseConnector myFirebaseConnector;
+    private MyFirebaseConnector myFirebaseConnector;
 
     CodeConfig codeConfig = new CodeConfig();
     MapView mapView;
