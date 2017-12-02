@@ -33,10 +33,6 @@ public class MyAnswer extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_answer);
 
-        mNow = System.currentTimeMillis();
-        current_date.format(new Date(mNow));
-        current_minute.format(new Date(mNow));
-
         setupToolbarWithUpNav(R.id.toolbar, name, R.drawable.ic_action_back);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
@@ -70,6 +66,9 @@ public class MyAnswer extends BaseActivity {
                 if (!text.getText().equals("")){
                     List<ChatData> data = new ArrayList<ChatData>();
                     ChatData item = new ChatData();
+                    mNow = System.currentTimeMillis();
+                    current_date.format(new Date(mNow));
+                    current_minute.format(new Date(mNow));
                     item.setTime(current_date + " " + current_minute);
                     item.setType("2");
                     item.setText(text.getText().toString());
