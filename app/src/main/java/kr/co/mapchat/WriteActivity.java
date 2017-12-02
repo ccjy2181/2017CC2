@@ -56,14 +56,7 @@ public class WriteActivity extends Activity implements MapView.MapViewEventListe
         mapPoint = mapPointWithGeoCoord(latitude,longitude);
         MapPoint.PlainCoordinate wcongMap = mapPoint.getMapPointWCONGCoord();
 
-        System.out.println("##################################################");
-        System.out.println(wcongMap.x);
-        System.out.println(wcongMap.y);
-        System.out.println(Property.MAP_IMAGE_URL + "&MX=" + (int)wcongMap.x + "&MY=" + (int)wcongMap.y + "&CX=" + (int)wcongMap.x + "&CY=" + (int)wcongMap.y);
-        System.out.println(imageManager.decodingImageData(Property.MAP_IMAGE_URL + "&MX=" + (int)wcongMap.x + "&MY=" + (int)wcongMap.y + "&CX=" + (int)wcongMap.x + "&CY=" + (int)wcongMap.y));
-        System.out.println("##################################################");
-
-        map_img.setImageBitmap(imageManager.decodingImageData(Property.MAP_IMAGE_URL + "&MX=" + (int)wcongMap.x + "&MY=" + (int)wcongMap.y + "&CX=" + (int)wcongMap.x + "&CY=" + (int)wcongMap.y));
+        map_img.setImageBitmap(imageManager.decodingImageData(imageManager.encodingImageData(Property.MAP_IMAGE_URL + "&MX=" + (int)wcongMap.x + "&MY=" + (int)wcongMap.y + "&CX=" + (int)wcongMap.x + "&CY=" + (int)wcongMap.y)));
 
         Spinner area = (Spinner)findViewById(R.id.area);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this,R.array.area,android.R.layout.simple_spinner_item);
