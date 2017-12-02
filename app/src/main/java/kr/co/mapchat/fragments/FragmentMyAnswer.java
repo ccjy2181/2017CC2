@@ -59,7 +59,7 @@ public class FragmentMyAnswer extends Fragment implements MessageADT.ViewHolder.
         mRecyclerView.setAdapter (mAdapter);
 
         myFirebaseConnector = new MyFirebaseConnector("message", this.getContext());
-        myFirebaseConnector.getMyMessage(data, mAdapter);
+        myFirebaseConnector.getMyAnwser(data, mAdapter);
 
 //        data.add(test);
 

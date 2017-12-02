@@ -22,6 +22,7 @@ import net.daum.mf.map.api.MapView;
 
 import java.util.Date;
 
+import kr.co.mapchat.dto.AnswerDTO;
 import kr.co.mapchat.dto.MessageDTO;
 import kr.co.mapchat.util.fireBase.MyFirebaseConnector;
 import kr.co.mapchat.util.system.ImageManager;
@@ -30,43 +31,33 @@ import kr.co.mapchat.util.system.Property;
 import static net.daum.mf.map.api.MapPoint.mapPointWithGeoCoord;
 
 public class ReplyActivity  extends Activity{
-    double longitude;
-    double latitude;
-
     String title;
 
-    MapPoint mapPoint;
-
     MyFirebaseConnector myFirebaseConnector;
+
+    MessageDTO messageDTO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Intent intent = getIntent();
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_write);
+        setContentView(R.layout.activity_reply);
 
         this.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
 
         Bundle bundle = intent.getExtras();
-        MessageDTO messageDTO = (MessageDTO) bundle.getSerializable("messageDTO");
+        messageDTO = (MessageDTO) bundle.getSerializable("messageDTO");
 
-        longitude = messageDTO.getLocation_longitude();
-        latitude = messageDTO.getLocation_latitude();
         title = messageDTO.getTitle();
 
         super.onCreate(savedInstanceState);
-        mapPoint = MapPoint.mapPointWithGeoCoord(latitude, longitude);
 
         ImageView img = (ImageView)findViewById(R.id.reply_map);
-
-        MapPoint.PlainCoordinate wcongMap = mapPoint.getMapPointWCONGCoord();
-        ImageManager imageManager = new ImageManager();
-
         TextView tv_title = (TextView) findViewById(R.id.reply_title);
+
+        ImageManager imageManager = new ImageManager();
+        img.setImageBitmap(imageManager.decodingImageData(messageDTO.getImage_string()));
         tv_title.setText(title);
-
-        img.setImageBitmap(imageManager.decodingImageData(Property.MAP_IMAGE_URL + "&MX=" + (int)wcongMap.x + "&MY=" + (int)wcongMap.y + "&CX=" + (int)wcongMap.x + "&CY=" + (int)wcongMap.y));
-
     }
 
     @Override
@@ -89,23 +80,14 @@ public class ReplyActivity  extends Activity{
 
         //DTO 새로 해서 넣어야합니당
 
-//        SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
-//        MessageDTO messageDTO = new MessageDTO();
-//        messageDTO.setUser(prefs.getString("token", ""));
-//        messageDTO.setTitle(getTitleInput());
-//        messageDTO.setContents(getContentInput());
-//        messageDTO.setRange(getArea());
-//        messageDTO.setLocation_latitude(latitude);
-//        messageDTO.setLocation_longitude(longitude);
-//        messageDTO.setAnswer_cnt(0);
-//        messageDTO.setRegdate(new Date());
-//        MapPoint.PlainCoordinate wcongMap = mapPoint.getMapPointWCONGCoord();
-//        ImageManager imageManager = new ImageManager();
-//        messageDTO.setImage_string(imageManager.encodingImageData(Property.MAP_IMAGE_URL + "&MX=" + (int)wcongMap.x + "&MY=" + (int)wcongMap.y + "&CX=" + (int)wcongMap.x + "&CY=" + (int)wcongMap.y));
-//        System.out.println();
-//
-//        myFirebaseConnector = new MyFirebaseConnector("message");
-//        myFirebaseConnector.insertData(messageDTO);
+        SharedPreferences prefs = getSharedPreferences("user", MODE_PRIVATE);
+        AnswerDTO answerDTO = new AnswerDTO();
+        answerDTO.setUser(prefs.getString("token", ""));
+        answerDTO.setComment(getContentInput());
+        answerDTO.setRegdate(new Date());
+
+        myFirebaseConnector = new MyFirebaseConnector("message");
+        myFirebaseConnector.insertData(answerDTO, messageDTO.getKey()+"/answer");
 
         finish();
     }

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -13,7 +14,11 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import kr.co.mapchat.util.fireBase.MyFirebaseConnector;
 
 public class CurrentLocation extends AppCompatActivity {
 
@@ -27,7 +32,7 @@ public class CurrentLocation extends AppCompatActivity {
     }
 
     public void setCurrentLocation(){
-        GpsPermissionCheckForMashMallo();
+        //GpsPermissionCheckForMashMallo();
         if(locationManager!=null){ // 위치정보 수집이 가능한 환경인지 검사.
             //gps 또는 네트워크를 이용하여 위치정보 수집
             boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -45,8 +50,8 @@ public class CurrentLocation extends AppCompatActivity {
                     //최신 위치를 가져오려면, location 파라메터를 이용하시면 됩니다.
                     public void onLocationChanged(Location location) {
                         Log.e("onLocationChanged", "onLocationChanged");
-                        // location.getProvider() gps인지, 네트워크인지
-                        // location.getLatitude() 위도 , location.getLongitude() 경도
+                        location.getProvider(); //gps인지, 네트워크인지
+                        location.getLatitude(); //위도 , location.getLongitude() 경도
                         Log.e("location", "[" + location.getProvider() + "] (" + location.getLatitude() + "," + location.getLongitude() + ")");
                             /*
                             SharedPreferences prefs = activity.getSharedPreferences("mju_sns", MODE_PRIVATE);
@@ -57,6 +62,15 @@ public class CurrentLocation extends AppCompatActivity {
                             param.put("location_longitude", location.getLongitude());
                             */
 //                        Toast.makeText(activity, "타입"+location.getProvider() + "," + location.getLatitude() + "," +location.getLongitude(), Toast.LENGTH_SHORT).show();
+                        SharedPreferences prefs = activity.getSharedPreferences("user", MODE_PRIVATE);
+                        Map<String, Object> userMap = new HashMap<>();
+                        userMap.put("location_latitude", location.getLatitude());
+                        userMap.put("location_longitude", location.getLongitude());
+
+                        MyFirebaseConnector myFirebaseConnector;
+                        myFirebaseConnector = new MyFirebaseConnector("user");
+                        myFirebaseConnector.updateData(prefs.getString("token", ""), userMap);
+
                         if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                                 ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
                             return;
@@ -114,8 +128,6 @@ public class CurrentLocation extends AppCompatActivity {
             }
         }
     }
-
-
 
     //권한 체크 메소드
     public void GpsPermissionCheckForMashMallo() {

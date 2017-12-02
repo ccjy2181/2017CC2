@@ -1,14 +1,11 @@
 package kr.co.mapchat.dto;
 
-import android.graphics.Bitmap;
-
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Map;
 
 import lombok.Data;
-
 @Data
-@SuppressWarnings("serial")
 public class MessageDTO implements Serializable {
         private String user;
         private String title;
@@ -17,8 +14,8 @@ public class MessageDTO implements Serializable {
         private double location_longitude;
         private int range;
         private String image_string;
-        private int answer_cnt;
         private Date regdate;
+        private Map<String, AnswerDTO> answer;
 
         //add data
         private String key;

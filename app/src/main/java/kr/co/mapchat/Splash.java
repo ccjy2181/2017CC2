@@ -1,5 +1,6 @@
 package kr.co.mapchat;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -11,8 +12,6 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.google.firebase.auth.PhoneAuthProvider;
-
-import kr.co.mapchat.util.fireBase.MyFirebaseConnector;
 
 public class Splash extends AppCompatActivity {
 

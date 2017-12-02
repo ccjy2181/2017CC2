@@ -8,5 +8,6 @@ import lombok.Data;
 public class UserDTO {
     private String token;
     private Date regdate;
-
+    private double location_latitude;
+    private double location_longitude;
 }

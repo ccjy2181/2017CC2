@@ -13,7 +13,9 @@ import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import kr.co.mapchat.adapter.MessageADT;
 import kr.co.mapchat.dto.MessageDTO;
@@ -42,9 +44,24 @@ public class MyFirebaseConnector {
         return resultData;
     }
 
+    public DatabaseReference insertData(Object obj, String target){
+        DatabaseReference resultData = databaseReference.child(table).child(target).push();
+        resultData.setValue(obj);
+        return resultData;
+    }
+
+    public DatabaseReference updateData(String target, Map<String, Object> data){
+        DatabaseReference resultData = databaseReference.child(table).child(target);
+        for (Map.Entry<String, Object> entry : data.entrySet()){
+            resultData.child(entry.getKey()).setValue(entry.getValue());
+        }
+        return resultData;
+    }
+
     public void getMarkerData(MapView mapView, MapPOIItem marker){
         final MapPOIItem item = marker;
         final MapView map = mapView;
+
         databaseReference.child(table).addChildEventListener(new ChildEventListener() {  // message는 child의 이벤트를 수신합니다.
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
@@ -55,7 +72,7 @@ public class MyFirebaseConnector {
                 item.setTag(0);
                 // 좌표값 지정
                 item.setMapPoint(mapPoint);
-                item.setMarkerType(MapPOIItem.MarkerType.BluePin);
+                item.setMarkerType(((messageDTO.getUser()).equals(token)) ? MapPOIItem.MarkerType.YellowPin : MapPOIItem.MarkerType.BluePin);
                 item.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
                 item.setItemName(messageDTO.getTitle());
                 item.setUserObject(messageDTO);
@@ -105,11 +122,39 @@ public class MyFirebaseConnector {
         });
     }
 
-    public String getQuestionTitle(DataSnapshot dataSnapshot){
-        MessageDTO messageDTO = dataSnapshot.getValue(MessageDTO.class);  // chatData를 가져오고
-        messageDTO.setKey(dataSnapshot.getKey());
+//    public String getQuestionTitle(DataSnapshot dataSnapshot){
+//        MessageDTO messageDTO = dataSnapshot.getValue(MessageDTO.class);  // chatData를 가져오고
+//        messageDTO.setKey(dataSnapshot.getKey());
+//
+//        String title = messageDTO.getTitle();
+//        return title;
+//    }
 
-        String title = messageDTO.getTitle();
-        return title;
+    public void getMyAnwser(List<MessageDTO> data, MessageADT adapter){
+        final List<MessageDTO> item = data;
+        final MessageADT itemAdapter = adapter;
+
+        databaseReference.child(table).orderByKey().getRef().orderByChild("answer").getRef().orderByKey().getRef().orderByChild("user").equalTo(token).addChildEventListener(new ChildEventListener() {  // message는 child의 이벤트를 수신합니다.
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                MessageDTO messageDTO = dataSnapshot.getValue(MessageDTO.class);  // chatData를 가져오고\
+                messageDTO.setKey(dataSnapshot.getKey());
+
+                item.add(0, messageDTO);
+                itemAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) { }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });
     }
 }

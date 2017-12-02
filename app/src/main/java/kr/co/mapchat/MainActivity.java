@@ -1,7 +1,9 @@
 package kr.co.mapchat;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Typeface;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -24,6 +26,7 @@ import kr.co.mapchat.fragments.FragmentMyAnswer;
 import kr.co.mapchat.fragments.FragmentMyQuestion;
 import kr.co.mapchat.fragments.FragmentMap;
 import kr.co.mapchat.fragments.FragmentMyInfo;
+import kr.co.mapchat.util.gps.CurrentLocation;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -32,6 +35,8 @@ public class MainActivity extends BaseActivity
     DrawerLayout drawer;
     MapPoint current_mp;
     AlertDialog dialog;
+
+    private LocationManager locationManager;
 
     double[] location = {0,0};
 
@@ -67,11 +72,19 @@ public class MainActivity extends BaseActivity
         navigationViewBottom = (NavigationView) findViewById(R.id.nav_view_bottom);
         navigationViewBottom.setNavigationItemSelectedListener(this);
 
+        setLocation();
+
 
 //        chats =(TextView) MenuItemCompat.getActionView(navigationView.getMenu().
 //                findItem(R.id.nav_chats));
 //        initializeCountDrawer();
 
+    }
+
+    private void setLocation(){
+        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
+        CurrentLocation currentLocation = new CurrentLocation(locationManager, this);
+        currentLocation.setCurrentLocation();
     }
 
     private void initializeCountDrawer(){

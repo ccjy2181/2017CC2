@@ -26,12 +26,6 @@ import kr.co.mapchat.dto.MessageDTO;
 import kr.co.mapchat.util.fireBase.MyFirebaseConnector;
 
 import static android.content.Context.MODE_PRIVATE;
-import static net.daum.mf.map.api.MapPOIItem.CalloutBalloonButtonType.MainButton;
-
-
-/**
- * Created by Dytstudio.
- */
 
 public class FragmentMap extends Fragment implements MapView.MapViewEventListener, MapView.POIItemEventListener{
     private MyFirebaseConnector myFirebaseConnector;
@@ -42,6 +36,8 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
     View view;
     MapPoint mapPoint;
 
+    String token;
+
     double[] location = {0,0};
 
     public FragmentMap(){
@@ -49,6 +45,10 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
     }
     public void onCreate(Bundle a){
         super.onCreate(a);
+
+        SharedPreferences sharedPreferences = this.getContext().getSharedPreferences("user", MODE_PRIVATE);
+        token = sharedPreferences.getString("token", "");
+
         setHasOptionsMenu(true);
     }
     @Override
@@ -86,21 +86,6 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
         return true;
     }
 
-//    public void addMarker(MapPoint mapPoint){
-//        MapPOIItem marker = new MapPOIItem();
-//        marker.setItemName("Default Marker");
-//        marker.setTag(0);
-//        // 좌표값 지정
-//        marker.setMapPoint(mapPoint);
-//        // 특정 값 주기 (문제에 대한 int 순서값, 제목 등등 Object 전부 가능)
-////        marker.setUserObject(code);
-//
-//        marker.setMarkerType(MapPOIItem.MarkerType.BluePin);
-//        marker.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
-//
-//        mapView.addPOIItem(marker);
-//    }
-
     public void resetFragment(){
         mapViewContainer.removeView(mapView);
         if(mapViewContainer.indexOfChild(mapView) == -1) {
@@ -115,7 +100,7 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
 
         final MapPOIItem marker = new MapPOIItem();
 
-        myFirebaseConnector = new MyFirebaseConnector("message");
+        myFirebaseConnector = new MyFirebaseConnector("message", this.getContext());
         myFirebaseConnector.getMarkerData(mapView, marker);
     }
 
@@ -194,13 +179,14 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
     @Override
     public void onCalloutBalloonOfPOIItemTouched(MapView mapView, MapPOIItem mapPOIItem, MapPOIItem.CalloutBalloonButtonType calloutBalloonButtonType) {
         MessageDTO messageDTO = (MessageDTO) mapPOIItem.getUserObject();
+        if(!messageDTO.getUser().equals(token)) {
+            Bundle bundle = new Bundle();
+            bundle.putSerializable("messageDTO", messageDTO);
 
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("messageDTO", messageDTO);
-
-        Intent intent = new Intent(getContext(), ReplyActivity.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
+            Intent intent = new Intent(getContext(), ReplyActivity.class);
+            intent.putExtras(bundle);
+            startActivity(intent);
+        }
     }
 
     @Override

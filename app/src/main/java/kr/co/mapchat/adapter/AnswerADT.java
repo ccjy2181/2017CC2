@@ -48,7 +48,7 @@ public class AnswerADT extends SelectableAdapter<AnswerADT.ViewHolder> {
         ImageManager imageManager = new ImageManager();
 
         viewHolder.tvName.setText(mArrayList.get(position).getTitle());
-        viewHolder.tvText_count.setText(mArrayList.get(position).getAnswer_cnt()+"");
+        viewHolder.tvText_count.setText(mArrayList.get(position).getAnswer().size()+"");
         if (isSelected(position)) {
             viewHolder.checked.setChecked(true);
             viewHolder.checked.setVisibility(View.VISIBLE);
