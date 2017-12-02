@@ -33,7 +33,6 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
     CodeConfig codeConfig = new CodeConfig();
     MapView mapView;
     RelativeLayout mapViewContainer;
-    View view;
     MapPoint mapPoint;
 
     String token;
@@ -53,15 +52,15 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
     }
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        view = inflater.inflate(R.layout.fragment_map, container, false);
+        View view = inflater.inflate(R.layout.fragment_map, container, false);
 
-        mapView = new MapView(view.getContext());
+        mapView = new MapView(this.getContext());
         mapView.setPOIItemEventListener(this);
+
+        mapViewContainer = (RelativeLayout)view.findViewById(R.id.map_view);
 
         getActivity().supportInvalidateOptionsMenu();
         ((MainActivity)getActivity()).changeTitle(R.id.toolbar, "실시간 질문");
-
-        mapViewContainer = (RelativeLayout)view.findViewById(R.id.map_view);
 
         return view;
     }
@@ -81,7 +80,6 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
             intent.putExtra("longitude", location[0]);
             intent.putExtra("latitude", location[1]);
             startActivity(intent);
-            mapViewContainer.removeView(mapView);
         }
         return true;
     }
@@ -114,7 +112,6 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
 
     @Override
     public void onPause() {
-        mapViewContainer.removeView(mapView);
         super.onPause();
     }
 

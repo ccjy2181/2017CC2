@@ -49,35 +49,31 @@ public class WriteActivity extends Activity implements MapView.MapViewEventListe
         latitude = intent.getDoubleExtra("latitude",0);
         super.onCreate(savedInstanceState);
 
-        mapView = new MapView(this);
-        mapViewContainer = (RelativeLayout)findViewById(R.id.write_map);
-        mapViewContainer.addView(mapView);
-        mapView.setShowCurrentLocationMarker(true);
+        ImageView map_img = (ImageView) findViewById(R.id.write_map);
+
+        ImageManager imageManager = new ImageManager();
 
         mapPoint = mapPointWithGeoCoord(latitude,longitude);
+        MapPoint.PlainCoordinate wcongMap = mapPoint.getMapPointWCONGCoord();
 
-        mapView.setMapCenterPoint(mapPoint, true);
+        System.out.println("##################################################");
+        System.out.println(wcongMap.x);
+        System.out.println(wcongMap.y);
+        System.out.println(Property.MAP_IMAGE_URL + "&MX=" + (int)wcongMap.x + "&MY=" + (int)wcongMap.y + "&CX=" + (int)wcongMap.x + "&CY=" + (int)wcongMap.y);
+        System.out.println(imageManager.decodingImageData(Property.MAP_IMAGE_URL + "&MX=" + (int)wcongMap.x + "&MY=" + (int)wcongMap.y + "&CX=" + (int)wcongMap.x + "&CY=" + (int)wcongMap.y));
+        System.out.println("##################################################");
+
+        map_img.setImageBitmap(imageManager.decodingImageData(Property.MAP_IMAGE_URL + "&MX=" + (int)wcongMap.x + "&MY=" + (int)wcongMap.y + "&CX=" + (int)wcongMap.x + "&CY=" + (int)wcongMap.y));
 
         Spinner area = (Spinner)findViewById(R.id.area);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this,R.array.area,android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         area.setAdapter(adapter);
 
-        ImageView invisible_img = (ImageView)findViewById(R.id.invisible_view);
-        invisible_img.bringToFront();
-        invisible_img.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return true;
-            }
-        });
-
         TextView tv_long = (TextView)findViewById(R.id.longitude);
         TextView tv_lati = (TextView)findViewById(R.id.latitude);
         tv_long.setText(Double.toString(longitude));
         tv_lati.setText(Double.toString(latitude));
-        mapView.setMapViewEventListener(this);
-
     }
 
     @Override
@@ -136,18 +132,15 @@ public class WriteActivity extends Activity implements MapView.MapViewEventListe
         myFirebaseConnector = new MyFirebaseConnector("message");
         myFirebaseConnector.insertData(messageDTO);
 
-        mapViewContainer.removeView(mapView);
         finish();
     }
 
     public void ButtonCancelClicked(View view) {
-        mapViewContainer.removeView(mapView);
         finish();
     }
 
     @Override
     public void onBackPressed(){
-        mapViewContainer.removeView(mapView);
         finish();
     }
 

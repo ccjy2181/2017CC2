@@ -155,7 +155,7 @@ public class MainActivity extends BaseActivity
         if (id == R.id.nav_all_question) {
             FragmentMap fragmentMap = new FragmentMap();
             ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.frameLayout, fragmentMap).addToBackStack(null).commit();
+            ft.replace(R.id.frameLayout, fragmentMap).commit();
         } else if (id == R.id.nav_my_question) {
             FragmentMyQuestion fragmentMyQuestion = new FragmentMyQuestion();
             ft = getSupportFragmentManager().beginTransaction();
