@@ -4,8 +4,13 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class ImageManager {
 
@@ -45,6 +50,9 @@ public class ImageManager {
     }
 
     private Bitmap getImageBitmap(InputStream is){
+        System.out.println("getImageBitmap__________________________");
+        System.out.println(is);
+
         inputStream = is;
 
         Thread mThread = new Thread() {
