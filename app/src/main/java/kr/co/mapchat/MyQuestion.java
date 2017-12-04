@@ -1,6 +1,5 @@
 package kr.co.mapchat;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import kr.co.mapchat.dto.MessageDTO;
 import kr.co.mapchat.recylcerchat.ChatData;
 import kr.co.mapchat.recylcerchat.ConversationRecyclerView;
 
@@ -26,18 +24,12 @@ public class MyQuestion extends BaseActivity {
     private Button send;
     private String name;
 
-    MessageDTO messageDTO;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_question);
 
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        messageDTO = (MessageDTO) bundle.getSerializable("messageDTO");
-
-        setupToolbarWithUpNav(R.id.toolbar, messageDTO.getTitle(), R.drawable.ic_action_back);
+        setupToolbarWithUpNav(R.id.toolbar, "컴공 화석", R.drawable.ic_action_back);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
