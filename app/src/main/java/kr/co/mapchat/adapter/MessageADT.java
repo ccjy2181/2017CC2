@@ -48,7 +48,7 @@ public class MessageADT extends SelectableAdapter<MessageADT.ViewHolder> {
         ImageManager imageManager = new ImageManager();
 
         viewHolder.tvName.setText(mArrayList.get(position).getTitle());
-        viewHolder.tvText_count.setText(mArrayList.get(position).getAnswer()+"");
+        viewHolder.tvText_count.setText((mArrayList.get(position).getAnswer()==null ? 0 : mArrayList.get(position).getAnswer().size())+"");
         if (isSelected(position)) {
             viewHolder.checked.setChecked(true);
             viewHolder.checked.setVisibility(View.VISIBLE);

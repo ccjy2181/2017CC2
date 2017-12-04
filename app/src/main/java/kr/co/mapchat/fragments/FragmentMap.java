@@ -29,6 +29,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class FragmentMap extends Fragment implements MapView.MapViewEventListener, MapView.POIItemEventListener{
     private MyFirebaseConnector myFirebaseConnector;
+    private SharedPreferences sharedPreferences;
 
     CodeConfig codeConfig = new CodeConfig();
     MapView mapView;
@@ -45,9 +46,9 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
     public void onCreate(Bundle a){
         super.onCreate(a);
 
-        SharedPreferences sharedPreferences = this.getContext().getSharedPreferences("user", MODE_PRIVATE);
-        token = sharedPreferences.getString("token", "");
+        sharedPreferences = this.getContext().getSharedPreferences("user", MODE_PRIVATE);
 
+        token = sharedPreferences.getString("token", "");
         setHasOptionsMenu(true);
     }
     @Override
@@ -92,7 +93,9 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
     }
 
     public void initMapView(){
+        mapView.setMapViewEventListener(this);
         mapView.setPOIItemEventListener(this);
+//        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(), true);
 
         mapViewContainer.addView(mapView, 0);
 
@@ -118,8 +121,8 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
     // MapView.MapViewEventListener
     @Override
     public void onMapViewInitialized(MapView mapView) {
-        location[0] = location[0] == 0 ? this.codeConfig.MJU_LATITUDE : location[0];
-        location[1] = location[1] == 0 ? this.codeConfig.MJU_LONGITUDE : location[1];
+        location[0] = location[0] == 0 ? Double.parseDouble(sharedPreferences.getString("latitude","")) : location[0];
+        location[1] = location[1] == 0 ? Double.parseDouble(sharedPreferences.getString("longitude","")) : location[1];
         mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(location[0], location[1]), 3, true);
     }
 

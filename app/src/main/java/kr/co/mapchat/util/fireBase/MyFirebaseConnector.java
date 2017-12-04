@@ -8,6 +8,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
@@ -18,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import kr.co.mapchat.adapter.MessageADT;
+import kr.co.mapchat.dto.AnswerDTO;
 import kr.co.mapchat.dto.MessageDTO;
 
 import static android.content.Context.MODE_PRIVATE;
@@ -98,13 +100,9 @@ public class MyFirebaseConnector {
         final List<MessageDTO> item = data;
         final MessageADT itemAdapter = adapter;
 
-        System.out.println(token);
-
         databaseReference.child(table).orderByKey().getRef().orderByChild("user").equalTo(token).addChildEventListener(new ChildEventListener() {  // message는 child의 이벤트를 수신합니다.
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                System.out.println("#############@@@@@@@");
-                System.out.println(dataSnapshot);
                 MessageDTO messageDTO = dataSnapshot.getValue(MessageDTO.class);  // chatData를 가져오고\
                 messageDTO.setKey(dataSnapshot.getKey());
 
@@ -126,37 +124,23 @@ public class MyFirebaseConnector {
         });
     }
 
-//    public String getQuestionTitle(DataSnapshot dataSnapshot){
-//        MessageDTO messageDTO = dataSnapshot.getValue(MessageDTO.class);  // chatData를 가져오고
-//        messageDTO.setKey(dataSnapshot.getKey());
-//
-//        String title = messageDTO.getTitle();
-//        return title;
-//    }
-
     public void getMyAnwser(List<MessageDTO> data, MessageADT adapter){
         final List<MessageDTO> item = data;
         final MessageADT itemAdapter = adapter;
 
-        databaseReference.child("message").orderByKey().getRef().child("comment").orderByKey().addChildEventListener(new ChildEventListener() {  // message는 child의 이벤트를 수신합니다.
+        databaseReference.child(table).addChildEventListener(new ChildEventListener() {  // message는 child의 이벤트를 수신합니다.
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                System.out.println("##################################");
-                        System.out.println(dataSnapshot.getValue());
-//                int i=0;
-//                for(DataSnapshot dsp : dataSnapshot.getChildren()){
-//                    MessageDTO messageDTO = dsp.getValue(MessageDTO.class);
-//                    messageDTO.setKey(dataSnapshot.getKey());
-//                    item.add(i, messageDTO);
-//                    itemAdapter.notifyDataSetChanged();
-//                    i++;
-//                }
-
-//                MessageDTO messageDTO = dataSnapshot.getValue(MessageDTO.class);  // chatData를 가져오고\
-//                messageDTO.setKey(dataSnapshot.getKey());
-//
-//                item.add(0, messageDTO);
-//                itemAdapter.notifyDataSetChanged();
+                for(DataSnapshot dsp : dataSnapshot.child("answer").getChildren()){
+                    System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
+                    AnswerDTO answerDTO = dsp.getValue(AnswerDTO.class);
+                    if(answerDTO.getUser().equals(token)) {
+                        MessageDTO messageDTO = dataSnapshot.getValue(MessageDTO.class);  // chatData를 가져오고\
+                        messageDTO.setKey(dataSnapshot.getKey());
+                        item.add(0, messageDTO);
+                        itemAdapter.notifyDataSetChanged();
+                    }
+                }
             }
 
             @Override

@@ -63,6 +63,10 @@ public class CurrentLocation extends AppCompatActivity {
                             */
 //                        Toast.makeText(activity, "타입"+location.getProvider() + "," + location.getLatitude() + "," +location.getLongitude(), Toast.LENGTH_SHORT).show();
                         SharedPreferences prefs = activity.getSharedPreferences("user", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = prefs.edit();
+                        editor.putString("latitude", location.getLatitude()+"");
+                        editor.putString("longitude", location.getLongitude()+"");
+                        editor.commit();
                         Map<String, Object> userMap = new HashMap<>();
                         userMap.put("location_latitude", location.getLatitude());
                         userMap.put("location_longitude", location.getLongitude());
