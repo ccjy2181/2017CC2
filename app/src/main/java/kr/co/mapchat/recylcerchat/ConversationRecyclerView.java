@@ -7,9 +7,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import kr.co.mapchat.R;
+import kr.co.mapchat.dto.AnswerDTO;
 
 /**
  * Created by Dytstudio.
@@ -18,13 +20,13 @@ import kr.co.mapchat.R;
 public class ConversationRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // The items to display in your RecyclerView
-    private List<ChatData> items;
+    private List<AnswerDTO> items;
     private Context mContext;
 
     private final int DATE = 0, YOU = 1, ME = 2;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ConversationRecyclerView(Context context, List<ChatData> items) {
+    public ConversationRecyclerView(Context context, List<AnswerDTO> items) {
         this.mContext = context;
         this.items = items;
     }
@@ -38,14 +40,15 @@ public class ConversationRecyclerView extends RecyclerView.Adapter<RecyclerView.
     @Override
     public int getItemViewType(int position) {
         //More to come
-        if (items.get(position).getType().equals("0")) {
-            return DATE;
-        } else if (items.get(position).getType().equals("1")) {
-            return YOU;
-        }else if (items.get(position).getType().equals("2")) {
-            return ME;
-        }
-        return -1;
+//        if (items.get(position).getType().equals("0")) {
+//            return DATE;
+//        } else if (items.get(position).getType().equals("1")) {
+//            return YOU;
+//        }else if (items.get(position).getType().equals("2")) {
+//            return ME;
+//        }
+        return YOU;
+//        return -1;
     }
 
     @Override
@@ -69,7 +72,7 @@ public class ConversationRecyclerView extends RecyclerView.Adapter<RecyclerView.
         }
         return viewHolder;
     }
-    public void addItem(List<ChatData> item) {
+    public void addItem(List<AnswerDTO> item) {
         items.addAll(item);
         notifyDataSetChanged();
     }
@@ -92,17 +95,19 @@ public class ConversationRecyclerView extends RecyclerView.Adapter<RecyclerView.
     }
 
     private void configureViewHolder3(HolderMe vh1, int position) {
-            vh1.getTime().setText(items.get(position).getTime());
-            vh1.getChatText().setText(items.get(position).getText());
+//            vh1.getTime().setText(items.get(position).getTime());
+//            vh1.getChatText().setText(items.get(position).getText());
     }
 
     private void configureViewHolder2(HolderYou vh1, int position) {
-            vh1.getTime().setText(items.get(position).getTime());
-            vh1.getDate().setText(items.get(position).getDate());
-            vh1.getChatText().setText(items.get(position).getText());
+        SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("HH:mm:ss");
+        vh1.getDate().setText(simpleDateFormat1.format(items.get(position).getRegdate()));
+        vh1.getTime().setText(simpleDateFormat2.format(items.get(position).getRegdate()));
+        vh1.getChatText().setText(items.get(position).getComment());
     }
     private void configureViewHolder1(HolderDate vh1, int position) {
-            vh1.getDate().setText(items.get(position).getText());
+//            vh1.getDate().setText(items.get(position).getText());
     }
 
 }

@@ -18,7 +18,6 @@
             android:layout_height="wrap_content"
             android:drawablePadding="@dimen/space5"
             android:drawableRight="@drawable/ic_clock"
-            android:text="2017-11-29 05:04"
             android:textColor="@color/colorTextInfo"
             android:textSize="@dimen/h4"
             android:textAppearance="@style/ExtraLight"/>
@@ -27,7 +26,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/space10"
-            android:text="Hi, joe how are you, do you like to join our party in next week because you don't like party?"
             android:textColor="@android:color/white"
             android:textSize="@dimen/h3"
             android:layout_alignParentRight="true"

@@ -11,24 +11,31 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import kr.co.mapchat.dto.AnswerDTO;
 import kr.co.mapchat.dto.MessageDTO;
 import kr.co.mapchat.recylcerchat.ChatData;
 import kr.co.mapchat.recylcerchat.ConversationRecyclerView;
+import kr.co.mapchat.util.fireBase.MyFirebaseConnector;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
 public class MyQuestion extends BaseActivity {
+    private MyFirebaseConnector myFirebaseConnector;
 
     private RecyclerView mRecyclerView;
     private ConversationRecyclerView mAdapter;
     private EditText text;
     private Button send;
     private String name;
-    List<ChatData> chatDataList;
+    List<AnswerDTO> data;
 
     MessageDTO messageDTO;
+
+    SimpleDateFormat simpleDateFormat;
 
     String[] test1 = { "test1", "test2" };
     String[] test2 = { "01:00", "01:02" };
@@ -38,23 +45,33 @@ public class MyQuestion extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_question);
 
+        data = new ArrayList<>();
+
+        simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         messageDTO = (MessageDTO) bundle.getSerializable("messageDTO");
 
         setupToolbarWithUpNav(R.id.toolbar, messageDTO.getTitle(), R.drawable.ic_action_back);
 
+        setQuestion(messageDTO.getContents(), messageDTO.getRegdate());
+
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new ConversationRecyclerView(this,setData());
+        mAdapter = new ConversationRecyclerView(this, data);
         mRecyclerView.setAdapter(mAdapter);
-        mRecyclerView.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                mRecyclerView.smoothScrollToPosition(mRecyclerView.getAdapter().getItemCount() - 1);
-            }
-        }, 1000);
+
+        myFirebaseConnector = new MyFirebaseConnector("message", this);
+        myFirebaseConnector.getMyMessage(data, mAdapter, messageDTO.getKey());
+
+//        mRecyclerView.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                mRecyclerView.smoothScrollToPosition(mRecyclerView.getAdapter().getItemCount() - 1);
+//            }
+//        }, 1000);
     }
 
 
@@ -63,12 +80,11 @@ public class MyQuestion extends BaseActivity {
         name = get_name;
     }
 
-    public void setTitle(String title, String time){
+    public void setQuestion(String title, Date time){
         TextView tv_title = (TextView)findViewById(R.id.question_title);
         TextView tv_time = (TextView)findViewById(R.id.question_time);
-
         tv_title.setText(title);
-        tv_time.setText(time);
+        tv_time.setText(simpleDateFormat.format(time));
     }
 
     public List<ChatData> setData(){

@@ -38,7 +38,7 @@ public class MyAnswer extends BaseActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new ConversationRecyclerView(this,setData());
+//        mAdapter = new ConversationRecyclerView(this, setData());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.postDelayed(new Runnable() {
             @Override
@@ -76,7 +76,7 @@ public class MyAnswer extends BaseActivity {
 
                     // Firebase에 답변 저장하는 코드 적어야함!
 
-                    mAdapter.addItem(data);
+//                    mAdapter.addItem(data);
                     mRecyclerView.smoothScrollToPosition(mRecyclerView.getAdapter().getItemCount() -1);
                     text.setText("");
                 }

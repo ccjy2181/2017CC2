@@ -21,6 +21,7 @@ import java.util.Map;
 import kr.co.mapchat.adapter.MessageADT;
 import kr.co.mapchat.dto.AnswerDTO;
 import kr.co.mapchat.dto.MessageDTO;
+import kr.co.mapchat.recylcerchat.ConversationRecyclerView;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -60,8 +61,7 @@ public class MyFirebaseConnector {
         return resultData;
     }
 
-    public void getMarkerData(MapView mapView, MapPOIItem marker){
-        final MapPOIItem item = marker;
+    public void getMarkerData(MapView mapView){
         final MapView map = mapView;
 
         databaseReference.child(table).addChildEventListener(new ChildEventListener() {  // message는 child의 이벤트를 수신합니다.
@@ -70,13 +70,13 @@ public class MyFirebaseConnector {
                 MessageDTO messageDTO = dataSnapshot.getValue(MessageDTO.class);  // chatData를 가져오고
                 messageDTO.setKey(dataSnapshot.getKey());
                 MapPoint mapPoint = MapPoint.mapPointWithGeoCoord(messageDTO.getLocation_latitude(), messageDTO.getLocation_longitude());
-
-                item.setTag(0);
+                MapPOIItem item = new MapPOIItem();
+                item.setItemName(messageDTO.getTitle());
+                item.setTag(map.getPOIItems().length);
                 // 좌표값 지정
                 item.setMapPoint(mapPoint);
                 item.setMarkerType(((messageDTO.getUser()).equals(token)) ? MapPOIItem.MarkerType.YellowPin : MapPOIItem.MarkerType.BluePin);
-                item.setSelectedMarkerType(MapPOIItem.MarkerType.RedPin);
-                item.setItemName(messageDTO.getTitle());
+                item.setSelectedMarkerType(((messageDTO.getUser()).equals(token)) ? MapPOIItem.MarkerType.YellowPin : MapPOIItem.MarkerType.RedPin);
                 item.setUserObject(messageDTO);
 
                 map.addPOIItem(item);
@@ -96,7 +96,7 @@ public class MyFirebaseConnector {
         });
     }
 
-    public void getMyMessage(List<MessageDTO> data, MessageADT adapter){
+    public void getMyMessageList(List<MessageDTO> data, MessageADT adapter){
         final List<MessageDTO> item = data;
         final MessageADT itemAdapter = adapter;
 
@@ -124,6 +124,32 @@ public class MyFirebaseConnector {
         });
     }
 
+    public void getMyMessage(List<AnswerDTO> data, ConversationRecyclerView adapter, String messageKey){
+        final List<AnswerDTO> item = data;
+        final ConversationRecyclerView itemAdapter = adapter;
+
+        databaseReference.child(table+"/"+messageKey+"/answer").addChildEventListener(new ChildEventListener() {  // message는 child의 이벤트를 수신합니다.
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                AnswerDTO answerDTO = dataSnapshot.getValue(AnswerDTO.class);
+                item.add(0, answerDTO);
+                itemAdapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {}
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) { }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) { }
+        });
+    }
+
     public void getMyAnwser(List<MessageDTO> data, MessageADT adapter){
         final List<MessageDTO> item = data;
         final MessageADT itemAdapter = adapter;
@@ -132,7 +158,6 @@ public class MyFirebaseConnector {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 for(DataSnapshot dsp : dataSnapshot.child("answer").getChildren()){
-                    System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
                     AnswerDTO answerDTO = dsp.getValue(AnswerDTO.class);
                     if(answerDTO.getUser().equals(token)) {
                         MessageDTO messageDTO = dataSnapshot.getValue(MessageDTO.class);  // chatData를 가져오고\

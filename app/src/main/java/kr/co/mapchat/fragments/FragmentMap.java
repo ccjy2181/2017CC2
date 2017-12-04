@@ -17,6 +17,8 @@ import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
+import java.util.Map;
+
 import kr.co.mapchat.CodeConfig;
 import kr.co.mapchat.MainActivity;
 import kr.co.mapchat.R;
@@ -27,7 +29,7 @@ import kr.co.mapchat.util.fireBase.MyFirebaseConnector;
 
 import static android.content.Context.MODE_PRIVATE;
 
-public class FragmentMap extends Fragment implements MapView.MapViewEventListener, MapView.POIItemEventListener{
+public class FragmentMap extends Fragment implements MapView.MapViewEventListener, MapView.POIItemEventListener, MapView.CurrentLocationEventListener{
     private MyFirebaseConnector myFirebaseConnector;
     private SharedPreferences sharedPreferences;
 
@@ -56,7 +58,6 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
         View view = inflater.inflate(R.layout.fragment_map, container, false);
 
         mapView = new MapView(this.getContext());
-        mapView.setPOIItemEventListener(this);
 
         mapViewContainer = (RelativeLayout)view.findViewById(R.id.map_view);
 
@@ -94,15 +95,18 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
 
     public void initMapView(){
         mapView.setMapViewEventListener(this);
+        mapView.setCurrentLocationEventListener(this);
         mapView.setPOIItemEventListener(this);
 //        mapView.setMapCenterPoint(MapPoint.mapPointWithGeoCoord(), true);
 
-        mapViewContainer.addView(mapView, 0);
+        //mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOnWithoutHeading);
+//        mapViewContainer.addView(mapView, 0);
 
-        final MapPOIItem marker = new MapPOIItem();
+        mapViewContainer.addView(this.mapView, 0);
+        //mapViewContainer.setVisibility(View.GONE);
 
         myFirebaseConnector = new MyFirebaseConnector("message", this.getContext());
-        myFirebaseConnector.getMarkerData(mapView, marker);
+        myFirebaseConnector.getMarkerData(mapView);
     }
 
     @Override
@@ -121,8 +125,8 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
     // MapView.MapViewEventListener
     @Override
     public void onMapViewInitialized(MapView mapView) {
-        location[0] = location[0] == 0 ? Double.parseDouble(sharedPreferences.getString("latitude","")) : location[0];
-        location[1] = location[1] == 0 ? Double.parseDouble(sharedPreferences.getString("longitude","")) : location[1];
+        location[0] = location[0] == 0 ? CodeConfig.MJU_LATITUDE : location[0];
+        location[1] = location[1] == 0 ? CodeConfig.MJU_LONGITUDE : location[1];
         mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(location[0], location[1]), 3, true);
     }
 
@@ -191,6 +195,28 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
 
     @Override
     public void onDraggablePOIItemMoved(MapView mapView, MapPOIItem mapPOIItem, MapPoint mapPoint) {
+
+    }
+
+    @Override
+    public void onCurrentLocationUpdate(MapView mapView, MapPoint mapPoint, float v) {
+        //this.mapView.setMapCenterPointAndZoomLevel(mapPoint, 3, true);
+        //this.mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOff);
+        //mapViewContainer.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void onCurrentLocationDeviceHeadingUpdate(MapView mapView, float v) {
+
+    }
+
+    @Override
+    public void onCurrentLocationUpdateFailed(MapView mapView) {
+
+    }
+
+    @Override
+    public void onCurrentLocationUpdateCancelled(MapView mapView) {
 
     }
 }
