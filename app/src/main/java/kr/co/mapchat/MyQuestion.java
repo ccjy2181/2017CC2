@@ -1,7 +1,7 @@
 package kr.co.mapchat;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -13,12 +13,14 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
-import kr.co.mapchat.dto.MessageDTO;
 import kr.co.mapchat.recylcerchat.ChatData;
 import kr.co.mapchat.recylcerchat.ConversationRecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 
 public class MyQuestion extends BaseActivity {
@@ -28,19 +30,22 @@ public class MyQuestion extends BaseActivity {
     private EditText text;
     private Button send;
     private String name;
+    List<ChatData> chatDataList;
 
+<<<<<<< HEAD
+=======
     MessageDTO messageDTO;
 
+    String[] test1 = { "test1", "test2" };
+    String[] test2 = { "01:00", "01:02" };
+
+>>>>>>> b0c44dc0fa2458b2f6699f627b54ca448f508e5f
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_question);
 
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        messageDTO = (MessageDTO) bundle.getSerializable("messageDTO");
-
-        setupToolbarWithUpNav(R.id.toolbar, messageDTO.getTitle(), R.drawable.ic_action_back);
+        setupToolbarWithUpNav(R.id.toolbar, "컴공 화석", R.drawable.ic_action_back);
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);

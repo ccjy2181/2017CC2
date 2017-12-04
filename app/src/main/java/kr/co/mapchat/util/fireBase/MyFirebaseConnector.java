@@ -96,34 +96,6 @@ public class MyFirebaseConnector {
         });
     }
 
-    public void getMyMessageList(List<MessageDTO> data, MessageADT adapter){
-        final List<MessageDTO> item = data;
-        final MessageADT itemAdapter = adapter;
-
-        databaseReference.child(table).orderByKey().getRef().orderByChild("user").equalTo(token).addChildEventListener(new ChildEventListener() {  // message는 child의 이벤트를 수신합니다.
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                MessageDTO messageDTO = dataSnapshot.getValue(MessageDTO.class);  // chatData를 가져오고\
-                messageDTO.setKey(dataSnapshot.getKey());
-
-                item.add(0, messageDTO);
-                itemAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) { }
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s) { }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) { }
-        });
-    }
-
     public void getMyMessage(List<MessageDTO> data, MessageADT adapter){
         final List<MessageDTO> item = data;
         final MessageADT itemAdapter = adapter;
@@ -160,6 +132,7 @@ public class MyFirebaseConnector {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 for(DataSnapshot dsp : dataSnapshot.child("answer").getChildren()){
+                    System.out.println("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
                     AnswerDTO answerDTO = dsp.getValue(AnswerDTO.class);
                     if(answerDTO.getUser().equals(token)) {
                         MessageDTO messageDTO = dataSnapshot.getValue(MessageDTO.class);  // chatData를 가져오고\

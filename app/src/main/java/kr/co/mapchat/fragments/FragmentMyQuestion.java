@@ -38,7 +38,6 @@ public class FragmentMyQuestion extends Fragment implements MessageADT.ViewHolde
     Bitmap bitmap;
     SimpleDateFormat current_date = new SimpleDateFormat("yyyy-MM-dd");
     SimpleDateFormat current_minute = new SimpleDateFormat("HH:mm");
-    List<MessageDTO> data;
 
     public FragmentMyQuestion(){
         setHasOptionsMenu(true);
@@ -51,7 +50,7 @@ public class FragmentMyQuestion extends Fragment implements MessageADT.ViewHolde
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_my_question, null, false);
 
-        data = new ArrayList<>();
+        List<MessageDTO> data = new ArrayList<>();
 
         getActivity().supportInvalidateOptionsMenu();
         ((MainActivity)getActivity()).changeTitle(R.id.toolbar, "내 질문");
@@ -64,19 +63,14 @@ public class FragmentMyQuestion extends Fragment implements MessageADT.ViewHolde
         mRecyclerView.setAdapter (mAdapter);
 
         myFirebaseConnector = new MyFirebaseConnector("message", this.getContext());
-        myFirebaseConnector.getMyMessageList(data, mAdapter);
+        myFirebaseConnector.getMyMessage(data, mAdapter);
 
         return view;
     }
 
     @Override
     public void onItemClicked (int position) {
-        Bundle bundle = new Bundle();
-        bundle.putSerializable("messageDTO", data.get(position));
-
-        Intent intent = new Intent(getActivity(), MyQuestion.class);
-        intent.putExtras(bundle);
-        startActivity(intent);
+        startActivity(new Intent(getActivity(), MyQuestion.class));
     }
 
     @Override
