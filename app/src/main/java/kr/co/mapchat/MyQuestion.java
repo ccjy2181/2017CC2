@@ -1,6 +1,7 @@
 package kr.co.mapchat;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -13,7 +14,10 @@ import kr.co.mapchat.recylcerchat.ChatData;
 import kr.co.mapchat.recylcerchat.ConversationRecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 
 public class MyQuestion extends BaseActivity {
@@ -23,7 +27,16 @@ public class MyQuestion extends BaseActivity {
     private EditText text;
     private Button send;
     private String name;
+    List<ChatData> chatDataList;
 
+<<<<<<< HEAD
+=======
+    MessageDTO messageDTO;
+
+    String[] test1 = { "test1", "test2" };
+    String[] test2 = { "01:00", "01:02" };
+
+>>>>>>> b0c44dc0fa2458b2f6699f627b54ca448f508e5f
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
