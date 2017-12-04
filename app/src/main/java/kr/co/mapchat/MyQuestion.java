@@ -9,6 +9,9 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import org.w3c.dom.Text;
 
 import kr.co.mapchat.dto.MessageDTO;
 import kr.co.mapchat.recylcerchat.ChatData;
@@ -42,6 +45,7 @@ public class MyQuestion extends BaseActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        setTitle("학생회관 줄 긴가요?", "2017-11-29 02:58");
         mAdapter = new ConversationRecyclerView(this,setData());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.postDelayed(new Runnable() {
@@ -57,12 +61,20 @@ public class MyQuestion extends BaseActivity {
         name = get_name;
     }
 
+    public void setTitle(String title, String time){
+        TextView tv_title = (TextView)findViewById(R.id.question_title);
+        TextView tv_time = (TextView)findViewById(R.id.question_time);
+
+        tv_title.setText(title);
+        tv_time.setText(time);
+    }
+
     public List<ChatData> setData(){
         List<ChatData> data = new ArrayList<>();
 
-        String text[] = {"학관 식당 좀 많이 긴가요??" , "네 아직 줄 길어요! 20분은 걸릴듯", "양식코너는 대기 별로 없어요. 대신 맛없음"};
-        String time[] = {"2017-11-29 02:58", "02:59", "03:01"};
-        String type[] = {"2","1","1"};
+        String text[] = {"네 아직 줄 길어요! 20분은 걸릴듯", "양식코너는 대기 별로 없어요. 대신 맛없음"};
+        String time[] = {"02:59", "03:01"};
+        String type[] = {"1","1"};
 
         for (int i=0; i<text.length; i++){
             ChatData item = new ChatData();
