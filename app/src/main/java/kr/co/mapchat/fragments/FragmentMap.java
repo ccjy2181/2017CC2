@@ -56,6 +56,7 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map, container, false);
+        view.bringToFront();
 
         mapView = new MapView(this.getContext());
 
