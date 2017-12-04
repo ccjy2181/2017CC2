@@ -38,7 +38,7 @@ public class MyAnswer extends BaseActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new ConversationRecyclerView(this,setData());
+        mAdapter = new ConversationRecyclerView(this,setTitle());
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.postDelayed(new Runnable() {
             @Override
@@ -87,6 +87,21 @@ public class MyAnswer extends BaseActivity {
     public void setName(String get_name){
         //채팅방 유저 이름 정해주기
         name = get_name;
+    }
+
+    public ChatData setTitle(){
+        // String text, String time 파라메터로 가져와서 넣기, 타입은 2로 고정(내가 보내는 메시지)
+
+        String text = "Test";
+        String time = "2017-11-29 02:58";
+        String type = "2";
+
+        ChatData item = new ChatData();
+        item.setType(type);
+        item.setText(text);
+        item.setTime(time);
+
+        return item;
     }
 
     public List<ChatData> setData(){

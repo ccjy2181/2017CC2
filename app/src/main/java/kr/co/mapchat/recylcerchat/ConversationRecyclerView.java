@@ -18,15 +18,15 @@ import kr.co.mapchat.R;
 public class ConversationRecyclerView extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // The items to display in your RecyclerView
-    private List<ChatData> items;
+    private List<ChatData> items = null;
     private Context mContext;
 
     private final int DATE = 0, YOU = 1, ME = 2;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ConversationRecyclerView(Context context, List<ChatData> items) {
+    public ConversationRecyclerView(Context context, ChatData items) {
         this.mContext = context;
-        this.items = items;
+        this.items.add(items);
     }
 
     // Return the size of your dataset (invoked by the layout manager)

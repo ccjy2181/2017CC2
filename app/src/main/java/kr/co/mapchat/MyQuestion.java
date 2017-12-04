@@ -2,6 +2,7 @@ package kr.co.mapchat;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
@@ -15,7 +16,10 @@ import kr.co.mapchat.recylcerchat.ChatData;
 import kr.co.mapchat.recylcerchat.ConversationRecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 
 
 public class MyQuestion extends BaseActivity {
@@ -25,8 +29,12 @@ public class MyQuestion extends BaseActivity {
     private EditText text;
     private Button send;
     private String name;
+    List<ChatData> chatDataList;
 
     MessageDTO messageDTO;
+
+    String[] test1 = { "test1", "test2" };
+    String[] test2 = { "01:00", "01:02" };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +50,12 @@ public class MyQuestion extends BaseActivity {
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new ConversationRecyclerView(this,setData());
+        mAdapter = new ConversationRecyclerView(this,setTitle());
         mRecyclerView.setAdapter(mAdapter);
+
+        // addReply에 있는 data들 전부 add 후 notifyDataSetChanged 실행
+        mAdapter.addItem(addReply(test1, test2));
+
         mRecyclerView.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -57,22 +69,32 @@ public class MyQuestion extends BaseActivity {
         name = get_name;
     }
 
-    public List<ChatData> setData(){
-        List<ChatData> data = new ArrayList<>();
+    public ChatData setTitle(){
+        // String text, String time 파라메터로 가져와서 넣기, 타입은 2로 고정(내가 보내는 메시지)
 
-        String text[] = {"학관 식당 좀 많이 긴가요??" , "네 아직 줄 길어요! 20분은 걸릴듯", "양식코너는 대기 별로 없어요. 대신 맛없음"};
-        String time[] = {"2017-11-29 02:58", "02:59", "03:01"};
-        String type[] = {"2","1","1"};
+        String text = "학관 식당 좀 많이 긴가요??";
+        String time = "2017-11-29 02:58";
+        String type = "2";
 
-        for (int i=0; i<text.length; i++){
+        ChatData item = new ChatData();
+        item.setType(type);
+        item.setText(text);
+        item.setTime(time);
+
+        return item;
+    }
+
+    public List<ChatData> addReply(String[] text, String[] time){
+
+        List<ChatData> items = new ArrayList<>();
+        for (int i=0; i<text.length; i++) {
             ChatData item = new ChatData();
-            item.setType(type[i]);
+            item.setType("1");
             item.setText(text[i]);
             item.setTime(time[i]);
-            data.add(item);
+            items.add(item);
         }
-
-        return data;
+        return items;
     }
 
     @Override
