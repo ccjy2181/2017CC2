@@ -33,6 +33,7 @@ public class CurrentLocation extends AppCompatActivity {
 
     public void setCurrentLocation(){
         //GpsPermissionCheckForMashMallo();
+        //System.out.println("!!!!!!!!!!!!!!!!!!!");
         if(locationManager!=null){ // 위치정보 수집이 가능한 환경인지 검사.
             //gps 또는 네트워크를 이용하여 위치정보 수집
             boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
@@ -136,9 +137,9 @@ public class CurrentLocation extends AppCompatActivity {
         //마시멜로우 버전 이하면 if문에 걸리지 않습니다.
         if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+            AlertDialog.Builder alertDialog = new AlertDialog.Builder(activity);
             alertDialog.setTitle("GPS 사용 허가 요청");
-            alertDialog.setMessage("앰버요청 발견을 알리기위해서는 사용자의 GPS 허가가 필요합니다.\n('허가'를 누르면 GPS 허가 요청창이 뜹니다.)");
+            alertDialog.setMessage("MapChat의 원활한 사용을 위해 사용자의 GPS 허가가 필요합니다.\n('허가'를 누르면 GPS 허가 요청창이 뜹니다.)");
             // OK 를 누르게 되면 설정창으로 이동합니다.
             alertDialog.setPositiveButton("허가",
                     new DialogInterface.OnClickListener() {

@@ -2,6 +2,7 @@ package kr.co.mapchat.util.fireBase;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -18,6 +19,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import kr.co.mapchat.MainActivity;
 import kr.co.mapchat.adapter.MessageADT;
 import kr.co.mapchat.dto.AnswerDTO;
 import kr.co.mapchat.dto.MessageDTO;
@@ -30,6 +32,8 @@ public class MyFirebaseConnector {
     private DatabaseReference databaseReference = firebaseDatabase.getReference();
     private String table;
     private String token;
+    private Context c;
+    private Boolean toastAction;
 
     public MyFirebaseConnector(String table){
         this.table = table;
@@ -37,6 +41,8 @@ public class MyFirebaseConnector {
 
     public MyFirebaseConnector(String table, Context c){
         this.table = table;
+        this.c = c;
+        this.toastAction = false;
         SharedPreferences sharedPreferences = c.getSharedPreferences("user", MODE_PRIVATE);
         token = sharedPreferences.getString("token", "");
     }
@@ -106,12 +112,21 @@ public class MyFirebaseConnector {
                 MessageDTO messageDTO = dataSnapshot.getValue(MessageDTO.class);  // chatData를 가져오고\
                 messageDTO.setKey(dataSnapshot.getKey());
 
-                item.add(0, messageDTO);
+                item.add(item.size(), messageDTO);
                 itemAdapter.notifyDataSetChanged();
             }
 
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String s) { }
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+//                for(MessageDTO m : item){
+//                    if(m.getKey().equals(dataSnapshot.getKey())){
+//                        int temp = item.indexOf(m);
+//                        m = dataSnapshot.getValue(MessageDTO.class);
+//                        item.set(temp, m);
+//                        itemAdapter.notifyDataSetChanged();
+//                    }
+//                }
+            }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) { }
@@ -134,6 +149,9 @@ public class MyFirebaseConnector {
                 AnswerDTO answerDTO = dataSnapshot.getValue(AnswerDTO.class);
                 item.add(0, answerDTO);
                 itemAdapter.notifyDataSetChanged();
+//                if (toastAction) {
+//                    Toast.makeText(c, "답변이 등록되었습니다!", Toast.LENGTH_LONG).show();
+//                }
             }
 
             @Override
@@ -148,6 +166,7 @@ public class MyFirebaseConnector {
             @Override
             public void onCancelled(DatabaseError databaseError) { }
         });
+//        toastAction = true;
     }
 
     public void getMyAnwser(List<MessageDTO> data, MessageADT adapter){

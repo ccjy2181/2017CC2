@@ -17,6 +17,7 @@ import net.daum.mf.map.api.MapPOIItem;
 import net.daum.mf.map.api.MapPoint;
 import net.daum.mf.map.api.MapView;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import kr.co.mapchat.CodeConfig;
@@ -55,15 +56,15 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
     }
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_map, container, false);
-        view.bringToFront();
+        View view = inflater.inflate(R.layout.fragment_map, null, false);
+        //view.bringToFront();
+
+        getActivity().supportInvalidateOptionsMenu();
+        ((MainActivity)getActivity()).changeTitle(R.id.toolbar, "실시간 질문");
 
         mapView = new MapView(this.getContext());
 
         mapViewContainer = (RelativeLayout)view.findViewById(R.id.map_view);
-
-        getActivity().supportInvalidateOptionsMenu();
-        ((MainActivity)getActivity()).changeTitle(R.id.toolbar, "실시간 질문");
 
         return view;
     }
@@ -204,6 +205,15 @@ public class FragmentMap extends Fragment implements MapView.MapViewEventListene
         //this.mapView.setMapCenterPointAndZoomLevel(mapPoint, 3, true);
         //this.mapView.setCurrentLocationTrackingMode(MapView.CurrentLocationTrackingMode.TrackingModeOff);
         //mapViewContainer.setVisibility(View.VISIBLE);
+
+//        Map<String, Object> userMap = new HashMap<>();
+//
+//        userMap.put("location_latitude", mapPoint.getMapPointGeoCoord().latitude);
+//        userMap.put("location_longitude", mapPoint.getMapPointGeoCoord().longitude);
+//
+//        MyFirebaseConnector myFirebaseConnectorForUser;
+//        myFirebaseConnectorForUser = new MyFirebaseConnector("user");
+//        myFirebaseConnectorForUser.updateData(token, userMap);
     }
 
     @Override

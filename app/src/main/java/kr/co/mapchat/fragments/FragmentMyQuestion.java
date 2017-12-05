@@ -58,9 +58,14 @@ public class FragmentMyQuestion extends Fragment implements MessageADT.ViewHolde
         ((MainActivity)getActivity()).changeTitle(R.id.toolbar, "내 질문");
 
         tv_selection = (TextView) view.findViewById(R.id.tv_selection);
+
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+        mLayoutManager.setReverseLayout(true);
+        mLayoutManager.setStackFromEnd(true);
+
         mRecyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
         mRecyclerView.setHasFixedSize(true);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setLayoutManager(mLayoutManager);
         mAdapter = new MessageADT(getContext(), data,this);
         mRecyclerView.setAdapter (mAdapter);
 
@@ -72,6 +77,8 @@ public class FragmentMyQuestion extends Fragment implements MessageADT.ViewHolde
 
     @Override
     public void onItemClicked (int position) {
+        System.out.println("????????????????????????");
+        System.out.println(position);
         Bundle bundle = new Bundle();
         bundle.putSerializable("messageDTO", data.get(position));
 

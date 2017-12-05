@@ -50,7 +50,8 @@ public class MainActivity extends BaseActivity
         FragmentTransaction ft;
         FragmentMap fragmentMap = new FragmentMap();
         ft = getSupportFragmentManager().beginTransaction();
-        ft.add(R.id.frameLayout, fragmentMap).commit();
+//        ft.add(R.id.frameLayout, fragmentMap).commit();
+        ft.replace(R.id.frameLayout, fragmentMap).commit();
 
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         final ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
